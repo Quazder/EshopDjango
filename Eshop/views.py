@@ -13,3 +13,14 @@ def home(request):
 def PodlahaDetail(request, pk):
     produkt = Produkt.objects.get(id=pk)
     return render(request, 'produkt/detail.html', {'produkt': produkt})
+
+
+def PodlahaKategorie(request, foo):
+    foo = foo.replace('-', ' ')
+    try:
+        kategorie = Kategorie.objects.get(nazev=foo)
+        produkty = Produkt.objects.filter(kategorie=kategorie)
+        return render(request, 'produkt/list.html', {'produkty': produkty, 'kategorie': kategorie})
+    except:
+        messages.success(request, ("Tahle kategorie neexistuje."))
+        return redirect('hlavni_stranka')

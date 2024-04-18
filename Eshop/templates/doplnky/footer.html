@@ -1,0 +1,42 @@
+{% load static %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<link href="{% static 'css/custom.css' %}" rel="stylesheet">
+
+<footer class="py-5 bg-white">
+    <div class="container">
+        <p class="text-center text-black custom-text mb-3">K O N T A K T</p>
+        <p class="text-center text-black custom-text2">support@epohdlahy.cz</p>
+        <p class="text-center custom-text3">EPODLAHY s.r.o. | Wolkerova 1061/6</p>
+        <div class="text-center custom-text3">
+            <a href="https://www.tiktok.com/epodlahy" target="_blank">
+                <i class="fab fa-tiktok" style="border: 1px solid; padding: 10px;"></i>
+            </a>
+            <a href="https://www.instagram.com/epodlahy" target="_blank">
+                <i class="fab fa-instagram" style="border: 1px solid; padding: 10px;"></i>
+            </a>
+            <a href="https://www.youtube.com/epodlahy" target="_blank">
+                <i class="fab fa-youtube" style="border: 1px solid; padding: 10px;"></i>
+            </a>
+            <a href="https://www.pinterest.com/epodlahy" target="_blank">
+                <i class="fab fa-pinterest" style="border: 1px solid; padding: 10px;"></i>
+            </a>
+        </div>
+        <div id="terms-container">
+            <hr id="terms-line">
+            <p id="terms-text" class="custom-text4">
+                <a href="https://www.shoptet.cz/univerzalni-obchodni-podminky-pro-eshop/">Obchodní smlouva</a>
+            </p>
+        </div>
+        <div class="icon-container">
+            <div class="icon-wrapper">
+                <a href="https://www.zasilkovna.cz/" target="_blank" ><img src="{% static 'assets/zasilkovna.png' %}" alt="Zásilkovna" class="footer-icon"></a>
+            </div>
+            <div class="icon-wrapper">
+                <a href="https://www.balikovna.cz/cs/uvod" target="_blank" ><img src="{% static 'assets/balikovnaNoBg.png' %}" alt="Balíkovna" class="footer-icon"></a>
+            </div>
+            <div class="icon-wrapper">
+                <a href="https://www.ceskaposta.cz/sluzby/baliky" target="_blank"><img src="{% static 'assets/posta.png' %}" alt="Česká pošta" class="footer-icon"></a>
+            </div>
+        </div>
+    </div>
+</footer>

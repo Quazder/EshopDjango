@@ -1,0 +1,96 @@
+.custom-text {
+    font-family: 'Arial', sans-serif;
+    font-size: 15px;
+    color: black;
+    font-weight: 530;
+}
+
+.custom-text2 {
+    font-family: 'Courier New', monospace;
+    font-size: 19px;
+    font-weight: 700;
+    margin-bottom: 0;
+}
+
+.custom-text3 {
+    font-family: 'Courier New', monospace;
+    font-size: 19px;
+    font-weight: 400;
+    color: rgba(140, 135, 135, 0.82);
+    margin-top: 0;
+}
+
+
+.custom-text4 {
+    font-family: 'Courier New', monospace;
+    font-size: 19px;
+    font-weight: 700;
+    color: rgba(140, 135, 135, 0.82);
+    margin-top: 0;
+}
+
+
+#terms-container {
+    width: 200px;
+    margin: -10px auto auto;
+    height: auto;
+    position: relative;
+    padding: 20px;
+}
+
+#terms-line {
+    border-top: 10px solid red;
+    margin-bottom: 30px;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    bottom: -12px;
+}
+
+#terms-text {
+    visibility: hidden;
+    text-align: center;
+    color: black;
+    opacity: 0;
+    margin-top: 18px;
+    transition: opacity 1s ease-in-out;
+    white-space: nowrap;
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+
+
+#terms-text a {
+    color: rgba(140, 135, 135, 0.82); /*Barva textu*/
+    text-decoration: none; /*Odebrání podtržení*/
+}
+
+#terms-container:hover #terms-line {
+    display: none;
+}
+
+#terms-container:hover #terms-text {
+    visibility: visible;
+    opacity: 1;
+}
+
+.icon-container {
+    display: flex; /* Umožní zarovnání ikon */
+    justify-content: center; /* Zarovná ikony na střed */
+    padding-top: 15px; /* Mezi ikonami a textem */
+}
+
+.icon-wrapper {
+    display: inline-block; /* Slouží k zarovnání ikon */
+    margin: 0 60px; /* slouží k odstupu mezi ikonami */
+}
+
+.footer-icon {
+    width: 100%;
+    max-width: 96px; /* Nastaví maximální šířku ikony */
+    height: auto; /* Umožní zachovat poměr stran ikony */
+}
