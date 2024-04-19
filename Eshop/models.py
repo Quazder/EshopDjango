@@ -1,7 +1,7 @@
 from django.db import models
 
 
-# modely pro eshop
+# modely pro eshop - 5 modelů - Kategorie, Brand, Produkt, Zakaznik, Objednavka
 class Kategorie(models.Model):
     nazev = models.CharField(max_length=50, verbose_name='Název kategorie', help_text='Vytvořte novou kategorii',
                              unique=True)
