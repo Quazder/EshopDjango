@@ -35,17 +35,28 @@ class Produkt(models.Model):
         ('bambus', 'Bambus'),
     ]
 
+    ZEME_CHOICES = [
+        ('Česká republika', 'Česká republika'),
+        ('Slovensko', 'Slovensko'),
+        ('Polsko', 'Polsko'),
+        ('Německo', 'Německo'),
+        ('Rakousko', 'Rakousko'),
+        ('Švýcarsko', 'Švýcarsko'),
+        ('Estonsko', 'Estonsko'),
+    ]
     # max_length - maximální délka textu
     # verbose_name - název sloupce v administraci
     # unique - hodnota musí být unikátní
     nazev = models.CharField(max_length=50, verbose_name='Název produktu', default='Podlaha')
     barva = models.CharField(max_length=50, verbose_name='Barva', choices=BARVA_CHOICES, default='světlá')
     material = models.CharField(max_length=50, verbose_name='Materiál', choices=MATERIAL_CHOICES, default='dub')
+    zeme_puvodu = models.CharField(max_length=50, verbose_name='Země původu', choices=ZEME_CHOICES, default='Česká '
+                                                                                                            'republika')
     # decimal_places - počet desetinných míst
     # max_digits - maximální počet číslic
     # default - výchozí hodnota
     # help_text - nápověda - zobrazí se v administraci vedle pole
-    cena = models.DecimalField(default=0, decimal_places=2, max_digits=10, verbose_name='Cena produktu',
+    cena = models.PositiveSmallIntegerField(default=800, verbose_name='Cena produktu',
                                help_text='Zadejte cenu prodoktu v kč')
     # ForeignKey - vazba na jiný model - v tomto případě na model Kategorie
     # on_delete=models.CASCADE - pokud se smaže kategorie, smaže se i všechny produkty v této kategorii

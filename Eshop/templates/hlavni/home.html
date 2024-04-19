@@ -62,11 +62,12 @@
                             <div class="card-body p-4">
                                 <div class="text-center">
                                     <!-- Product name-->
-                                    <h5 class="fw-bolder">{{ produkt.nazev }}</h5>
+                                    <h5 class="fw-bolder">{{ produkt.kategorie }}</h5>
+                                    <br>
                                     <!-- Product price-->
-                                    ${{ produkt.cena }}
+                                    {{ produkt.cena }} Kč/m²
                                     <br/>
-                                    {{ produkt.popis }}
+                                    {{ produkt.zeme_puvodu }}
                                 </div>
                             </div>
                             <!-- Product actions-->
