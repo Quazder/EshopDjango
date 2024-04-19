@@ -107,6 +107,11 @@
     height: auto; /* Umožní zachovat poměr stran ikony */
 }
 
+.mailto a {
+    text-decoration: none;
+    color: inherit;
+}
+
 /* FOOTER */
 
 /* NAVBAR */
