@@ -4,7 +4,43 @@
 {% endblock %}
 
 {% block content %}
-    <title>{{ produkt.nazev }}</title>
-    <h2>HOME|HOME|HOME|HOME|HOME|</h2>
+    <div class="container">
 
+    <div class="card mb-3">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src="{{ produkt.fotka.url }}" class="img-fluid rounded-start" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">{{ produkt.nazev }}</h5>
+        <p class="card-text">{{ produkt.popis }}.</p>
+
+          {% if produkt.je_akce %}
+
+              <div class="d-flex small text-warning mb-2">
+                  <div class="bi-star-fill"></div>
+                  &nbsp;&nbsp;Na skladě&nbsp;&nbsp;
+                  <div class="bi-star-fill"></div>
+              </div>
+
+              <strike>${{ product.price }}</strike>
+              ${{ produkt.akce_cena }}
+              <br/>
+              {{ produkt.popis }}
+
+          {% else %}
+              ${{ produkt.cena }}
+              <br/>ID: {{ produkt.id }}
+          {% endif %}
+
+          <a href="{% url 'hlavni_stranka' %}" class="btn btn-secondary">Home</a>
+          <button type="button" value="{{ produkt.id }}" class="btn btn-secondary" id="add-cart">Přidat do košíku</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+    </div>
 {% endblock %}
