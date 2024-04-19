@@ -232,12 +232,12 @@
     transform: scale(1.15);
     transition: transform 0.3s ease-in-out;
 }
-
+/*
 .container .row {
     display: flex;
     justify-content: space-between;
 }
-
+*/
 .container .row .col-md-4 {
     width: calc((100% - 152px) / 3);
 }
@@ -315,3 +315,37 @@
 }
 
 /* NAVBAR */
+
+
+/* MAIN STRANKA - HOME */
+.product-image-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.product-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.5s ease-in-out; /* adjust the duration and easing function as needed */
+}
+
+.product-image.original {
+    opacity: 1;
+}
+
+.product-image.closeup {
+    opacity: 0;
+}
+
+.product-image-container {
+    position: relative;
+    width: 100%;
+    height: 200px; /* adjust this value as needed */
+    overflow: hidden; /* this will ensure that the images don't overflow the container */
+}
+/* MAIN STRANKA - HOME */
