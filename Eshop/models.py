@@ -16,6 +16,7 @@ class Kategorie(models.Model):
 
 class Produkt(models.Model):
     BARVA_CHOICES = [
+        ('', ''),
         ('černá', 'Černá'),
         ('světlá', 'Světlá'),
         ('hnědá', 'Hnědá'),
@@ -25,6 +26,7 @@ class Produkt(models.Model):
         ('béžová', 'Béžová'),
         ('světle béžová', 'Světle béžová'),
         ('akátová', 'Akátová'),
+
     ]
 
     MATERIAL_CHOICES = [
@@ -49,29 +51,38 @@ class Produkt(models.Model):
     # on_delete=models.CASCADE - pokud se smaže kategorie, smaže se i všechny produkty v této kategorii
     kategorie = models.ForeignKey(Kategorie, on_delete=models.CASCADE, default=1, verbose_name='Kategorie produktu',
                                   help_text='Vyberte kategorii produktu')
-    barva = models.CharField(max_length=50, verbose_name='Barva', choices=BARVA_CHOICES, default='světlá')
-    material = models.CharField(max_length=50, verbose_name='Materiál', choices=MATERIAL_CHOICES, default=' ')
+
+    barva = models.CharField(max_length=50, verbose_name='Barva', choices=BARVA_CHOICES, blank='True')
+    material = models.CharField(max_length=50, verbose_name='Materiál', choices=MATERIAL_CHOICES,
+                                blank='True')
+
     # decimal_places - počet desetinných míst
     # max_digits - maximální počet číslic
     # default - výchozí hodnota
     # help_text - nápověda - zobrazí se v administraci vedle pole
-    cena = models.DecimalField(default=800, verbose_name='Cena produktu',
-                               help_text='Zadejte cenu produktu v Kč/m²', decimal_places=2, max_digits=10)
+    cena = models.DecimalField( verbose_name='Cena produktu',
+                               help_text='Zadejte cenu produktu v Kč/m² - Pouze u podlah| Ostatně Kč/ks',
+                               decimal_places=2, max_digits=10)
+
     # CharField - textové pole
     # blank=True - pole může být prázdné
     # null=True - hodnota může být null
     popis = models.CharField(max_length=500, default='', blank=True, null=True, verbose_name='Popis produktu',
                              help_text='Zadejte popis produktu - max 500 znaků')
+
     # ImageField - obrázek/fotka/logo...
     # upload_to - cesta kam se uloží fotka produktu - media/fotky/produkty
     fotka = models.ImageField(upload_to='fotky/produkty/', verbose_name='Fotka produktu',
                               help_text='Vyberte fotku produktu')
+
     closeup_fotka = models.ImageField(upload_to='fotky/closeup/', verbose_name='Fotka produktu v bytě',
-                                      help_text='Vyberte fotku z dálky')
+                                      help_text='Vyberte fotku z dálky', blank=True)
+
     # BooleanField - True/False
     # default=False - výchozí hodnota Booleanu je False
     je_akce = models.BooleanField(default=False, verbose_name='Je produkt v akci',
                                   help_text='Zaškrtněte pokud je produkt v akci')
+
     # DecimalField - desetinné číslo
     akce_cena = models.DecimalField(default=0, decimal_places=2, max_digits=10, verbose_name='Akční cena',
                                     help_text='Zadejte akční cenu produktu v kč/m³')
