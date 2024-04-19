@@ -239,6 +239,11 @@
     background-size: contain;
     background-repeat: no-repeat; /* Prevents the image from repeating */
 }
+.aer {
+    text-decoration: none;
+    color: black;
+    font-weight: 750;
+}
 
 #logo:hover {
     background-image: url('/static/assets/logo_hover.png');
@@ -260,7 +265,7 @@
 }
 
 .underline-text {
-    border-bottom: 3px solid whitesmoke; /* Adjust thickness and color as needed */
+    border-bottom: 3px solid #93f2ff; /* Adjust thickness and color as needed */
     width: 60px; /* Adjust width as needed */
     border-radius: 50%;
     margin: -2px auto 8px;
@@ -268,10 +273,11 @@
 
 .custom-textNav {
     font-family: 'Arial', sans-serif;
-    font-size: 20px;
-    color: wheat;
-    font-weight: 530;
+    font-size: 22px;
+    color: #8d7d45;
+    font-weight: 900;
     white-space: nowrap;
+
 }
 
 .top-margin {

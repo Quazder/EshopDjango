@@ -10,7 +10,6 @@
         <!-- Section-->
         <section class="py-5">
             <div class="container px-4 px-lg-5 mt-5">
-                test
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
 
 
@@ -62,8 +61,9 @@
                             <div class="card-body p-4">
                                 <div class="text-center">
                                     <!-- Product name-->
-                                    <h5 class="fw-bolder">{{ produkt.nazev }}</h5>
+                                    <h5 class="fw-bolder">{{ produkt.brand.all|first }}</h5>
                                     <br>
+                                    <a class="aer" href="{% url 'kategorie_podlahy' produkt.kategorie %}">{{ produkt.kategorie }}<br></a>
                                     <!-- Product price-->
                                     {{ produkt.cena }} Kč/m²
                                     <br/>

@@ -4,18 +4,17 @@
 {% endblock %}
 
 {% block content %}
-            <header class="bg-dark py-5">
+            <header class=" py-5">
             <div class="container px-4 px-lg-5 my-5">
                 <div class="text-center text-white">
-                    <h1 class="display-4 fw-bolder">{{ category }}</h1>
-                    <p class="lead fw-normal text-white-50 mb-0">Kategorie</p>
+                    <h1 class="display-4 fw-bolder text-black">{{ kategorie }}</h1>
+                    <div class="text-black mx-5 my-3">{{ kategorie.popis }}</div>
                 </div>
             </div>
         </header>
 
         <section class="py-5">
             <div class="container px-4 px-lg-5 mt-5">
-                test
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
 
 
@@ -59,7 +58,10 @@
                     <div class="col mb-5">
                         <div class="card h-100">
                             <!-- Product image-->
-                            <img class="card-img-top" src="{{ produkt.fotka.url }}" alt="..." />
+                            <div class="product-image-container">
+                                <img class="product-image original card-img-top" src="{{ produkt.fotka.url }}" alt="..." />
+                                <img class="product-image closeup card-img-top" src="{{ produkt.closeup_fotka.url }}" alt="{{ produkt.nazev }}" style="opacity: 0;" />
+                            </div>
                             <!-- Product details-->
                             <div class="card-body p-4">
                                 <div class="text-center">

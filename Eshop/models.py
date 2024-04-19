@@ -5,6 +5,7 @@ from django.db import models
 class Kategorie(models.Model):
     nazev = models.CharField(max_length=50, verbose_name='Název kategorie', help_text='Vytvořte novou kategorii',
                              unique=True)
+    popis = models.CharField(max_length=500, default='', blank=True, null=True, verbose_name='Popis kategorie')
 
     class Meta:
         verbose_name = 'Kategorie'
@@ -12,6 +13,39 @@ class Kategorie(models.Model):
 
     def __str__(self):
         return self.nazev
+
+
+class Brand(models.Model):
+    BRAND_CHOICES = [
+        ('nizza', 'Nizza'),
+        ('zen', 'Zen'),
+        ('dublin', 'Dublin'),
+        ('kahrs', 'Kahrs'),
+        ('triumph', 'Triumph'),
+        ('soldline', 'Soldline'),
+    ]
+
+    SPECIFIKACE_CHOICES = [
+        ('', ''),
+        ('koberce', 'Koberec'),
+        ('vinyl', 'Vinylové podlahy'),
+        ('drevo', 'Dřevěné podlahy'),
+        ('laminat', 'Laminátové podlahy'),
+    ]
+
+    nazev = models.CharField(max_length=50, verbose_name='Jméno brandu', choices=BRAND_CHOICES)
+    popis = models.CharField(max_length=500, default='', verbose_name='Popis brandu')
+    odvetvi = models.CharField(max_length=50, verbose_name='Specifikace', choices=SPECIFIKACE_CHOICES, default='')
+
+    class Meta:
+        verbose_name = 'Brand'
+        verbose_name_plural = 'Brandy'
+
+    def __str__(self):
+        if self.nazev is None:
+            return 'No brand name'
+        else:
+            return self.nazev.capitalize()
 
 
 class Produkt(models.Model):
@@ -46,7 +80,7 @@ class Produkt(models.Model):
     # max_length - maximální délka textu
     # verbose_name - název sloupce v administraci
     # unique - hodnota musí být unikátní
-    nazev = models.CharField(max_length=50, verbose_name='Název produktu', default='')
+    brand = models.ManyToManyField(Brand, verbose_name='Název produktu', help_text='Brand = název produktu')
     # ForeignKey - vazba na jiný model - v tomto případě na model Kategorie
     # on_delete=models.CASCADE - pokud se smaže kategorie, smaže se i všechny produkty v této kategorii
     kategorie = models.ForeignKey(Kategorie, on_delete=models.CASCADE, default=1, verbose_name='Kategorie produktu',
@@ -60,7 +94,7 @@ class Produkt(models.Model):
     # max_digits - maximální počet číslic
     # default - výchozí hodnota
     # help_text - nápověda - zobrazí se v administraci vedle pole
-    cena = models.DecimalField( verbose_name='Cena produktu',
+    cena = models.DecimalField(verbose_name='Cena produktu',
                                help_text='Zadejte cenu produktu v Kč/m² - Pouze u podlah| Ostatně Kč/ks',
                                decimal_places=2, max_digits=10)
 
@@ -97,7 +131,8 @@ class Produkt(models.Model):
     # __str__ - metoda, která se volá při výpisu objektu - v administraci
     # vrací název produktu a cenu produktu v Kč
     def __str__(self):
-        return f'{self.nazev} - {self.cena} Kč/m³'
+        brand_names = ", ".join([str(brand) for brand in self.brand.all()])
+        return f'{brand_names} - {self.cena} Kč/m³ {self.kategorie}'
 
 
 class Zakaznik(models.Model):
