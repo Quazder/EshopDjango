@@ -1,3 +1,4 @@
+/* FOOTER */
 .custom-text {
     font-family: 'Arial', sans-serif;
     font-size: 15px;
@@ -94,3 +95,187 @@
     max-width: 96px; /* Nastaví maximální šířku ikony */
     height: auto; /* Umožní zachovat poměr stran ikony */
 }
+
+/* FOOTER */
+
+/* NAVBAR */
+.navbar {
+    margin-top: 50px;
+    transform: scale(1.1);
+}
+
+.navbar .navbar-nav {
+    justify-content: center;
+}
+
+.navbar .navbar-nav .nav-item.dropdown {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%)
+}
+
+.navbar .navbar-nav .nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.navbar .navbar-nav .nav-item.dropdown .dropdown-toggle::after {
+    display: none;
+}
+
+.navbar .navbar-nav .nav-item.dropdown .dropdown-toggle {
+    font-weight: 800;
+}
+
+.cart-container .badge-overlap {
+    position: absolute; /* Position the badge absolutely within the cart container */
+    top: -10px; /* Adjust as needed */
+    right: 0; /* Adjust as needed */
+    transform: none; /* Remove the translate transform */
+    padding: 5px 10px; /* Increase padding around the text */
+    border-radius: 10px; /* Make the corners more rounded */
+    display: flex; /* Use flexbox for alignment */
+    justify-content: center; /* Center the text horizontally */
+    align-items: center; /* Center the text vertically */
+    width: 20px; /* Set a fixed width */
+    height: 20px; /* Set a fixed height */
+}
+
+.cart-container {
+    position: relative; /* Make the cart container a relative container */
+}
+
+.cart-container .bi.bi-cart-fill {
+    /* Adjust size and position for larger screens */
+}
+
+.cart-container .badge-overlap {
+    position: absolute; /* Position the badge absolutely within the cart container */
+    top: -10px; /* Adjust as needed */
+    right: 0; /* Adjust as needed */
+    transform: none; /* Remove the translate transform */
+}
+
+/* CSS for medium screens */
+@media (max-width: 768px) {
+    .cart-container .bi.bi-cart-fill {
+        /* Adjust size and position for medium screens */
+    }
+}
+
+/* CSS for small screens */
+@media (max-width: 600px) {
+    .cart-container .bi.bi-cart-fill {
+        /* Adjust size and position for small screens */
+    }
+}
+
+/* CSS for very small screens */
+@media (max-width: 400px) {
+    .cart-container .bi.bi-cart-fill {
+        /* Adjust size and position for very small screens */
+    }
+}
+
+.badge-overlap {
+    transform: translate(50%, -50%);
+}
+
+.btn:hover {
+    transform: scale(1.15);
+    transition: transform 0.3s ease-in-out;
+}
+
+#logo {
+    background-image: url('/static/assets/logo.png');
+    height: 60px;
+    width: 150px;
+    background-size: contain;
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+}
+
+#logo:hover {
+    background-image: url('/static/assets/logo_hover.png');
+    transform: scale(1.15);
+    transition: transform 0.3s ease-in-out;
+}
+
+.container .row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.container .row .col-md-4 {
+    width: calc((100% - 152px) / 3);
+}
+
+.container .row .col-md-4:not(:last-child) {
+    margin-right: 76px;
+}
+
+.underline-text {
+    border-bottom: 3px solid whitesmoke; /* Adjust thickness and color as needed */
+    width: 60px; /* Adjust width as needed */
+    margin: 0 auto; /* Center the line */
+    border-radius: 50%;
+}
+
+.custom-textNav {
+    font-family: 'Arial', sans-serif;
+    font-size: 20px;
+    color: wheat;
+    font-weight: 530;
+    white-space: nowrap;
+}
+
+.top-margin {
+    margin-top: 80px; /* Adjust as needed */
+}
+
+/* CSS for medium screens */
+@media (max-width: 768px) {
+    .custom-textNav {
+        font-size: 16px; /* Smaller font size */
+    }
+
+    .underline-text {
+        width: 40px; /* Smaller underline width */
+    }
+
+    .top-margin {
+        margin-top: 40px; /* Smaller margin */
+    }
+}
+
+/* CSS for small screens */
+@media (max-width: 600px) {
+    .custom-textNav {
+        font-size: 14px; /* Even smaller font size */
+    }
+
+    .underline-text {
+        width: 30px; /* Even smaller underline width */
+    }
+
+    .top-margin {
+        margin-top: 20px; /* Even smaller margin */
+    }
+}
+
+/* CSS for very small screens */
+@media (max-width: 400px) {
+    .custom-textNav {
+        font-size: 12px; /* Smallest font size */
+    }
+
+    .underline-text {
+        width: 20px; /* Smallest underline width */
+    }
+
+    .top-margin {
+        margin-top: 10px; /* Smallest margin */
+    }
+}
+
+/* NAVBAR */
