@@ -17,7 +17,7 @@
     font-family: 'Courier New', monospace;
     font-size: 19px;
     font-weight: 400;
-    color: rgba(140, 135, 135, 0.82);
+    color: rgba(120, 120 ,120 , 0.82);
     margin-top: 0;
 }
 
@@ -30,6 +30,16 @@
     margin-top: 0;
 }
 
+.fab {
+    color: grey;
+}
+
+
+.fab:hover {
+    color: black;
+    transform: scale(1.1);
+    transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+}
 
 #terms-container {
     width: 200px;
@@ -40,7 +50,8 @@
 }
 
 #terms-line {
-    border-top: 10px solid red;
+    color: #1a1a1a;
+    border-top: 10px solid;
     margin-bottom: 30px;
     position: absolute;
     left: 0;
@@ -217,8 +228,8 @@
 .underline-text {
     border-bottom: 3px solid whitesmoke; /* Adjust thickness and color as needed */
     width: 60px; /* Adjust width as needed */
-    margin: 0 auto; /* Center the line */
     border-radius: 50%;
+    margin: -2px auto 8px;
 }
 
 .custom-textNav {
@@ -276,6 +287,10 @@
     .top-margin {
         margin-top: 10px; /* Smallest margin */
     }
+}
+
+.background-barva{
+    background-color: #1a1a1a;
 }
 
 /* NAVBAR */
