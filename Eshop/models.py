@@ -15,10 +15,32 @@ class Kategorie(models.Model):
 
 
 class Produkt(models.Model):
+    BARVA_CHOICES = [
+        ('černá', 'Černá'),
+        ('světlá', 'Světlá'),
+        ('hnědá', 'Hnědá'),
+        ('šedá', 'Šedá'),
+    ]
+
+    MATERIAL_CHOICES = [
+        ('dub', 'Dub'),
+        ('buk', 'Buk'),
+        ('smrk', 'Smrk'),
+        ('javor', 'Javor'),
+        ('bříza', 'Bříza'),
+        ('jedle', 'Jedle'),
+        ('borovice', 'Borovice'),
+        ('akát', 'Akát'),
+        ('mahagon', 'Mahagon'),
+        ('bambus', 'Bambus'),
+    ]
+
     # max_length - maximální délka textu
     # verbose_name - název sloupce v administraci
     # unique - hodnota musí být unikátní
-    nazev = models.CharField(max_length=50, verbose_name='Název produktu', unique=True)
+    nazev = models.CharField(max_length=50, verbose_name='Název produktu', default='Podlaha')
+    barva = models.CharField(max_length=50, verbose_name='Barva', choices=BARVA_CHOICES, default='světlá')
+    material = models.CharField(max_length=50, verbose_name='Materiál', choices=MATERIAL_CHOICES, default='dub')
     # decimal_places - počet desetinných míst
     # max_digits - maximální počet číslic
     # default - výchozí hodnota
@@ -38,6 +60,8 @@ class Produkt(models.Model):
     # upload_to - cesta kam se uloží fotka produktu - media/fotky/produkty
     fotka = models.ImageField(upload_to='fotky/produkty/', verbose_name='Fotka produktu',
                               help_text='Vyberte fotku produktu')
+    closeup_fotka = models.ImageField(upload_to='fotky/closeup/', verbose_name='Fotka produktu v bytě',
+                                      help_text='Vyberte fotku z dálky')
     # BooleanField - True/False
     # default=False - výchozí hodnota Booleanu je False
     je_akce = models.BooleanField(default=False, verbose_name='Je produkt v akci',
