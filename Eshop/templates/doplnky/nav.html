@@ -10,42 +10,54 @@
                     <div id="logo"></div>
                 </a>
 
-
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                        <div class="row">
+                            {% if user.is_authenticated %}
+                                <div class="col-lg-4">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="">
+                                            <i class="bi bi-box-arrow-right"></i>
+                                        </a>
+                                    </li>
+                                </div>
+                            {% else %}
+                                <div class="col-lg-4">
+                                    <li class="nav-item"><a class="nav-link" href="">Login</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="">Registrace</a></li>
+                                </div>
+                            {% endif %}
+
+                            <div class="col-lg-4">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="">
+                                        <i class="bi2 bi-search"></i>
+                                    </a>
+                                </li>
+                            </div>
 
 
-                        {% if user.is_authenticated %}
-                            <li class="nav-item">
-                                <a class="nav-link" href="">
-                                    <i class="bi bi-box-arrow-right"></i>
-                                </a>
-                            </li>
-                        {% else %}
-                            <li class="nav-item"><a class="nav-link" href="">Login</a></li>
-                            <li class="nav-item"><a class="nav-link" href="">Registrace</a></li>
-                        {% endif %}
-
-
-
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">&#9776;</a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="{% url 'hlavni_stranka' %}">Všechny produkty</a></li>
-                                <li><hr class="dropdown-divider" /></li>
-                                <li><a class="dropdown-item" href="{% url 'kategorie_podlahy' 'Dřevěné podlahy' %}">Dřevěné</a></li>
-                                <li><a class="dropdown-item" href="{% url 'kategorie_podlahy' 'Vinylové podlahy' %}">Vinylové</a></li>
-                                <li><a class="dropdown-item" href="{% url 'kategorie_podlahy' 'Laminátové podlahy' %}">Laminátové</a></li>
-                                <li><a class="dropdown-item" href="{% url 'kategorie_podlahy' 'Koberce' %}">Koberce</a></li>
-                                <li><a class="dropdown-item" href="{% url 'kategorie_podlahy' 'Ostatní' %}">Ostatní</a></li>
-                            </ul>
-                        </li>
+                            <div class="col-lg-4">
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">&#9776;</a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <li><a class="dropdown-item" href="{% url 'hlavni_stranka' %}">Všechny produkty</a></li>
+                                        <li><hr class="dropdown-divider" /></li>
+                                        <li><a class="dropdown-item" href="{% url 'kategorie_podlahy' 'Dřevěné podlahy' %}">Dřevěné</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'kategorie_podlahy' 'Vinylové podlahy' %}">Vinylové</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'kategorie_podlahy' 'Laminátové podlahy' %}">Laminátové</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'kategorie_podlahy' 'Koberce' %}">Koberce</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'kategorie_podlahy' 'Ostatní' %}">Ostatní</a></li>
+                                    </ul>
+                                </li>
+                            </div>
+                        </div>
                     </ul>
                     <form class="d-flex position-relative">
                         <div class="cart-container">
                             <a href="" class="btn btn-outline-dark rounded p-2">
-                                <i class="bi bi-cart-fill"></i> <!-- Třída ikony košíku Bootstrap -->
+                                <i class="bi3 bi-cart-fill"></i> <!-- Třída ikony košíku Bootstrap -->
                                 <span class="badge bg-dark text-white position-absolute top-0 start-100 translate-middle badge-overlap">0</span>
                             </a>
                         </div>

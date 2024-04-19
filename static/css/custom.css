@@ -115,8 +115,30 @@
     transform: scale(1.1);
 }
 
-.navbar .navbar-nav {
-    justify-content: center;
+
+.bi{
+    position: absolute;
+    left: 52%;
+    transform: translateX(-50%);
+}
+
+.bi2{
+    position: absolute;
+    left: 48%;
+    transform: translateX(-50%)
+}
+
+@media (max-width: 991px) {
+    .navbar .navbar-nav .row {
+        flex-direction: row;
+        justify-content: space-around; /* Zarovná ikony tak, aby byly rovnoměrně rozloženy s mezerami kolem nich */
+    }
+
+    .navbar .navbar-nav .row .col-lg-4 {
+        flex: 0 0 auto;
+        width: auto;
+        padding: 0 80px;
+    }
 }
 
 .navbar .navbar-nav .nav-item.dropdown {
@@ -124,7 +146,6 @@
     left: 50%;
     transform: translateX(-50%)
 }
-
 .navbar .navbar-nav .nav-item.dropdown:hover .dropdown-menu {
     display: block;
     left: 50%;
