@@ -20,9 +20,15 @@ class Produkt(models.Model):
         ('světlá', 'Světlá'),
         ('hnědá', 'Hnědá'),
         ('šedá', 'Šedá'),
+        ('světle šedá', 'Světle šedá'),
+        ('tmavě šedá', 'Tmavě šedá'),
+        ('béžová', 'Béžová'),
+        ('světle béžová', 'Světle béžová'),
+        ('akátová', 'Akátová'),
     ]
 
     MATERIAL_CHOICES = [
+        (' ', ' '),
         ('dub', 'Dub'),
         ('buk', 'Buk'),
         ('smrk', 'Smrk'),
@@ -33,35 +39,24 @@ class Produkt(models.Model):
         ('akát', 'Akát'),
         ('mahagon', 'Mahagon'),
         ('bambus', 'Bambus'),
-    ]
-
-    ZEME_CHOICES = [
-        ('Česká republika', 'Česká republika'),
-        ('Slovensko', 'Slovensko'),
-        ('Polsko', 'Polsko'),
-        ('Německo', 'Německo'),
-        ('Rakousko', 'Rakousko'),
-        ('Švýcarsko', 'Švýcarsko'),
-        ('Estonsko', 'Estonsko'),
+        ('jasan', 'Jasan'),
     ]
     # max_length - maximální délka textu
     # verbose_name - název sloupce v administraci
     # unique - hodnota musí být unikátní
-    nazev = models.CharField(max_length=50, verbose_name='Název produktu', default='Podlaha')
-    barva = models.CharField(max_length=50, verbose_name='Barva', choices=BARVA_CHOICES, default='světlá')
-    material = models.CharField(max_length=50, verbose_name='Materiál', choices=MATERIAL_CHOICES, default='dub')
-    zeme_puvodu = models.CharField(max_length=50, verbose_name='Země původu', choices=ZEME_CHOICES, default='Česká '
-                                                                                                            'republika')
-    # decimal_places - počet desetinných míst
-    # max_digits - maximální počet číslic
-    # default - výchozí hodnota
-    # help_text - nápověda - zobrazí se v administraci vedle pole
-    cena = models.PositiveSmallIntegerField(default=800, verbose_name='Cena produktu',
-                               help_text='Zadejte cenu prodoktu v kč')
+    nazev = models.CharField(max_length=50, verbose_name='Název produktu', default='')
     # ForeignKey - vazba na jiný model - v tomto případě na model Kategorie
     # on_delete=models.CASCADE - pokud se smaže kategorie, smaže se i všechny produkty v této kategorii
     kategorie = models.ForeignKey(Kategorie, on_delete=models.CASCADE, default=1, verbose_name='Kategorie produktu',
                                   help_text='Vyberte kategorii produktu')
+    barva = models.CharField(max_length=50, verbose_name='Barva', choices=BARVA_CHOICES, default='světlá')
+    material = models.CharField(max_length=50, verbose_name='Materiál', choices=MATERIAL_CHOICES, default=' ')
+    # decimal_places - počet desetinných míst
+    # max_digits - maximální počet číslic
+    # default - výchozí hodnota
+    # help_text - nápověda - zobrazí se v administraci vedle pole
+    cena = models.DecimalField(default=800, verbose_name='Cena produktu',
+                               help_text='Zadejte cenu produktu v Kč/m²', decimal_places=2, max_digits=10)
     # CharField - textové pole
     # blank=True - pole může být prázdné
     # null=True - hodnota může být null
