@@ -1,2 +1,3 @@
 # Virtuální prosředí Pythonu (virtualenv) - vytvořené pomocí .venv
 .venv
+.xml

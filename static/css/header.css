@@ -1,0 +1,49 @@
+.custom-textNav {
+    font-family: 'Arial', sans-serif;
+    font-size: 21px;
+    color: #8d7d45;
+    font-weight: 900;
+    white-space: nowrap;
+
+}
+
+
+.underline-text {
+    border-bottom: 3px solid #93f2ff; /* Adjust thickness and color as needed */
+    width: 60px; /* Adjust width as needed */
+    border-radius: 50%;
+    margin: -2px auto 8px;
+}
+
+/* CSS for medium screens */
+@media (max-width: 768px) {
+    .custom-textNav {
+        font-size: 16px; /* Smaller font size */
+    }
+
+    .underline-text {
+        width: 40px; /* Smaller underline width */
+    }
+}
+
+/* CSS for small screens */
+@media (max-width: 600px) {
+    .custom-textNav {
+        font-size: 14px; /* Even smaller font size */
+    }
+
+    .underline-text {
+        width: 30px; /* Even smaller underline width */
+    }
+}
+
+/* CSS for very small screens */
+@media (max-width: 400px) {
+    .custom-textNav {
+        font-size: 12px; /* Smallest font size */
+    }
+
+    .underline-text {
+        width: 20px; /* Smallest underline width */
+    }
+}
