@@ -1,6 +1,14 @@
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django import forms
+
+
+class EditProfileForm(UserChangeForm):
+    password = forms.CharField(label="", widget=forms.TextInput(attrs={'type': 'hidden'}))
+
+    class Meta:
+        model = User
+        fields = ('username', 'first_name', 'last_name', 'email', 'password',)
 
 
 class SignUpForm(UserCreationForm):
@@ -13,7 +21,7 @@ class SignUpForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ('username', 'jmeno', 'prijmenu', 'email', 'password1', 'password2')
+        fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2')
 
     def __init__(self, *args, **kwargs):
         super(SignUpForm, self).__init__(*args, **kwargs)
@@ -22,16 +30,20 @@ class SignUpForm(UserCreationForm):
         self.fields['username'].widget.attrs['placeholder'] = 'Uživatelské jméno'
         self.fields['username'].label = ''
         self.fields[
-            'username'].help_text = '<span class="form-text text-muted"><small>Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</small></span>'
+            'username'].help_text = '<span class="form-text text-muted"><small>MUsí obsahovat číslice a nebo ' \
+                                    '@/./+/-/_ only.</small></span>'
 
         self.fields['password1'].widget.attrs['class'] = 'form-control'
-        self.fields['password1'].widget.attrs['placeholder'] = 'Password'
+        self.fields['password1'].widget.attrs['placeholder'] = 'Heslo'
         self.fields['password1'].label = ''
         self.fields[
-            'password1'].help_text = '<ul class="form-text text-muted small"><li>Your password can\'t be too similar to your other personal information.</li><li>Your password must contain at least 8 characters.</li><li>Your password can\'t be a commonly used password.</li><li>Your password can\'t be entirely numeric.</li></ul>'
+            'password1'].help_text = '<ul class="form-text text-muted small"><li>Vaše heslo by nemělo být stejné jako ' \
+                                     'vaše ostatní hesla.</li><li>Heslo musí obsahovat aspoň 8 znaků</li><li>Heslo ' \
+                                     'nesmí být jednoduché</li><li>Heslo nesmí obsahovat pouze čísla</li></ul>'
 
         self.fields['password2'].widget.attrs['class'] = 'form-control'
-        self.fields['password2'].widget.attrs['placeholder'] = 'Confirm Password'
+        self.fields['password2'].widget.attrs['placeholder'] = 'Potvrdit heslo'
         self.fields['password2'].label = ''
         self.fields[
-            'password2'].help_text = '<span class="form-text text-muted"><small>Enter the same password as before, for verification.</small></span>'
+            'password2'].help_text = '<span class="form-text text-muted"><small>Zadejte stejné heslo ' \
+                                     'znovu</small></span>'

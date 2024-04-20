@@ -1,0 +1,46 @@
+{% extends 'hlavni/base.html' %}
+
+{% block content %}
+
+    <header class="py-5 mt-5">
+        <div class="container mt-5">
+            <h1 class="display-5 fw-bold text-black text-center h1-fix">Změnit heslo</h1>
+            <a href="{% url 'zmena_profilu' %}" class="btn btn-secondary btnNoBorder text-danger">Zpět</a>
+        </div>
+    </header>
+
+
+    <div class="container py-0">
+    <div class="row" >
+        <div class="col-8">
+            <br/><br/>
+          <form method="POST" action="{% url 'zmena_hesla' %}">
+		{% csrf_token %}
+
+		{% if form.errors %}
+			<div class="alert alert-warning alert-dismissable" role="alert">
+            <button class="close" data-dismiss="alert">
+                    <small><sup>x</sup></small>
+                </button>
+            {% for field in form %}
+            	{% if field.errors  %}
+            		{{ field.errors }}
+            	{% endif %}
+
+            {% endfor %}
+
+          </div>
+
+
+		{% endif %}
+
+
+			{{ form.as_p }}
+
+		<input type="submit" value="Změnit Heslo" class="btn btn-secondary mb-5 btnNoBorder">
+	</form>
+        </div>
+    </div>
+    </div>
+
+{% endblock %}

@@ -640,3 +640,17 @@ img {
 #add-to-cart {
     display: none; /* Hide the button initially */
 }
+
+
+.btnNoBorder{
+    border: none;
+}
+
+.btnNoBorder:hover{
+    transform: scale(1.2);
+    transition: transform 0.3s ease-in-out;
+}
+
+.h1-fix{
+    margin-bottom: -10px;
+}

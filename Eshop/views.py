@@ -1,10 +1,11 @@
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
 
-from .forms import SignUpForm
+from .forms import SignUpForm, EditProfileForm
 from .models import Kategorie, Produkt, Zakaznik, Objednavka, Brand
 
 
@@ -65,10 +66,10 @@ def prihlaseni_uzivatele(request):
             return redirect('hlavni_stranka')
         else:
             messages.success(request, "Operace se nezdařila, prosím, zkuste to znovu.")
-            return redirect('login  ')
+            return redirect('prihlaseni')
 
     else:
-        return render(request, 'uzivatele/login.html', {})
+        return render(request, 'uzivatele/login.html')
 
 
 def registrace_uzivatele(request):
@@ -94,3 +95,32 @@ def odhlaseni_uzivatele(request):
     logout(request)
     messages.success(request, "Odhlášení proběhlo úspěšně.")
     return redirect('hlavni_stranka')
+
+
+def zmena_hesla(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(data=request.POST, user=request.user)
+        if form.is_valid():
+            form.save()
+            update_session_auth_hash(request, form.user)
+            messages.success(request, ('Změnili jste Vaše heslo.'))
+            return redirect('hlavni_stranka')
+    else:
+        form = PasswordChangeForm(user=request.user)
+
+    context = {'form': form}
+    return render(request, 'uzivatele/zmenit_heslo.html', context)
+
+
+def zmena_profilu(request):
+    if request.method == 'POST':
+        form = EditProfileForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, ('Změnili jste Váš profil'))
+            return redirect('hlavni_stranka')
+    else:
+        form = EditProfileForm(instance=request.user)
+
+    context = {'form': form}
+    return render(request, 'uzivatele/zmenit_profil.html', context)

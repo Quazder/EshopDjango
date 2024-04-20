@@ -8,14 +8,16 @@
                 <a id="logo" href="{% url 'hlavni_stranka' %}"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                        {% if user.is_authenticated %}
-                            <li class="nav-item"><a class="nav-link" href="{% url 'odhlaseni' %}"><i class="bi bi-box-arrow-right"></i></a></li>
-                        {% else %}
-                            <li class="nav-item"><a class="nav-link" href="{% url 'prihlaseni' %}">Login</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{% url 'registrace' %}">Registrace</a></li>
-                        {% endif %}
+
+                        <li class="nav-item">
+                            {% if user.is_authenticated %}
+                                <li class="nav-item"><a class="nav-link" href="{% url 'odhlaseni' %}"><i class="bi bi-box-arrow-right"></i></a></li>
+                                <li class="nav-item"><a class="nav-link" href="{% url 'zmena_profilu' %}"><b>{{ user.username|first|capfirst }}</b></a></li>
+                            {% else %}
+                                <li class="nav-item"><a class="nav-link" href="{% url 'prihlaseni' %}"><i class="bi bi-person-fill"></i></a></li>
+                            {% endif %}
+                        </li>
 
 
 
@@ -29,9 +31,7 @@
                                         <li><a class="dropdown-item" href="{% url 'kategorie_podlahy' 'Laminátové podlahy' %}">Laminátové</a></li>
                                         <li><a class="dropdown-item" href="{% url 'kategorie_podlahy' 'Koberce' %}">Koberce</a></li>
                                     </ul>
-                        </li>
                     </ul>
-
                     <form class="d-flex">
                         <a href="#" class="btn btn-outline-dark"><i class="bi-cart-fill me-1"></i>
                             Košík

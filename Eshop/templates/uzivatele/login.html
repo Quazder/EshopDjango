@@ -1,17 +1,14 @@
 {% extends 'hlavni/base.html' %}
 
 {% block content %}
+         <header class="py-5 mt-5">
+         <div class="container mt-5">
+             <h1 class="display-5 fw-bold text-dark text-center h1-fix">Přihlásit se</h1>
+         </div>
+     </header>
 
-     <header class="bg-dark py-5">
-            <div class="container px-4 px-lg-5 my-5">
-                <div class="text-center text-white">
-                    <h1 class="display-4 fw-bolder">Přihlásit</h1>
-                    <p class="lead fw-normal text-white-50 mb-0">Přihlásit se k účtu</p>
-                </div>
-            </div>
-        </header>
 
-    <div class="container">
+    <div class="container py-0">
         <div class="row">
             <center>
                 <div class="col-8">
@@ -22,7 +19,7 @@
 
                         <div class="mb-3">
                             <label>
-                                <input type="text" class="form-control" name="username" placeholder="Zadejte své přihlašovací jméno">
+                                <input type="text" class="form-control" name="username" placeholder="Zadejte svůj nickname">
                             </label>
                         </div>
                         <div class="mb-3">
@@ -30,15 +27,10 @@
                                 <input type="password" class="form-control" name="password" placeholder="Zadejte své heslo">
                             </label>
                         </div>
-                        <button type="submit" class="btn btn-secondary">Přihlásit se</button>
+                        <button type="submit" class="btn btn-secondary btnNoBorder mb-5">Přihlásit se</button>
                     </form>
 
-                    <br/><br/>
-                    <br/><br/>
-                    <br/><br/>
-                    <br/><br/>
-
-
+                    <a href="{% url 'registrace' %}" class="btn btn-secondary btnNoBorder mb-5">Nemáš účet? Vytvoř ho!</a>
                 </div>
             </center>
         </div>

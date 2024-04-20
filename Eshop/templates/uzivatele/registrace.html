@@ -2,11 +2,11 @@
 
 {% block content %}
 
-     <header class="bg-dark py-5">
-            <div class="container px-4 px-lg-5 my-5">
-                <div class="text-center text-white">
+     <header class="py-5 mt-5">
+            <div class="container mt-5">
+                <div class="text-center text-black">
                     <h1 class="display-4 fw-bolder">Vytvořit účet</h1>
-                    <p class="lead fw-normal text-white-50 mb-0">Zaregistrovat se</p>
+                    <p class="lead fw-normal text-black mb-0">Zaregistrovat se</p>
                 </div>
             </div>
         </header>
@@ -20,19 +20,28 @@
                     <form method="POST" action="{% url 'registrace' %}">
                         {% csrf_token %}
 
+
+
+                        {% if form.errors %}
+                            <div class="alert alert-warning alert-dismissable" role="alert">
+                                <button class="close" data-dismiss="alert">
+                                    <small><sup>x</sup></small>
+                                </button>
+                                <p>Your Form Has Errors...</p>
+                                {% for field in form %}
+                                    {% if field.errors  %}
+                                        {{ field.errors }}
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+
+
+
                         {{ form.as_p }}
                         <br/><br/>
-                        <button type="submit" class="btn btn-secondary">Zaregistrovat se</button>
-
-
+                        <button type="submit" class="btn btn-secondary mb-5 btnNoBorder">Zaregistrovat se</button>
                     </form>
-
-                    <br/><br/>
-                    <br/><br/>
-                    <br/><br/>
-                    <br/><br/>
-
-
                 </div>
             </center>
         </div>

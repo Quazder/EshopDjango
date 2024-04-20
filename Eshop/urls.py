@@ -12,5 +12,7 @@ urlpatterns = [
     path('cs/přihlášení/', views.prihlaseni_uzivatele, name='prihlaseni'),
     path('cs/registrace/', views.registrace_uzivatele, name='registrace'),
     path('cs/odhlášení/', views.odhlaseni_uzivatele, name='odhlaseni'),
+    path('cs/zmena_hesla/', views.zmena_hesla, name='zmena_hesla'),
+    path('cs/zmena_profilu/', views.zmena_profilu, name='zmena_profilu'),
 
 ]
