@@ -57,3 +57,37 @@ window.addEventListener('load', function() {
         underlineElements[i].style.width = brandElements[i].offsetWidth + 'px';
     }
 });
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    let priceElement = document.getElementById('total-price');
+    if (priceElement) {
+        let price = priceElement.textContent.replace(',', '.');
+        price = parseFloat(price);
+        priceElement.textContent = price.toString().replace('.', ',') + " Kč";
+    }
+});
+
+
+function calculateArea() {
+    const xValue = parseFloat(document.getElementById('x-value').value);
+    const yValue = parseFloat(document.getElementById('y-value').value);
+    let result = xValue * yValue;
+
+    // Get the package size and price per package from the hidden elements
+    const packageSize = parseFloat(document.getElementById('package-size').textContent);
+    const pricePerPackage = parseFloat(document.getElementById('price-per-package').textContent);
+
+    let packagesNeeded = Math.round(result / packageSize); // Use Math.round to round to the nearest whole number
+
+    // Calculate the cost
+    let cost = result * pricePerPackage;
+
+    // Update the area, package results and cost separately
+    document.getElementById('area-result').textContent = result.toFixed(2);
+    document.getElementById('package-result').textContent = packagesNeeded;
+    document.getElementById('cost-result').textContent = cost.toFixed(2);
+
+    // Display the "Add to Cart" button
+    document.getElementById('add-to-cart').style.display = 'inline-block';
+}

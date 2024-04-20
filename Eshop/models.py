@@ -1,3 +1,4 @@
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 
 
@@ -95,9 +96,11 @@ class Produkt(models.Model):
     # max_digits - maximální počet číslic
     # default - výchozí hodnota
     # help_text - nápověda - zobrazí se v administraci vedle pole
-    cena = models.DecimalField(verbose_name='Cena produktu',
-                               help_text='Zadejte cenu produktu v Kč/m² - Pouze u podlah| Ostatně Kč/ks',
-                               decimal_places=2, max_digits=10)
+    cena = models.PositiveIntegerField(verbose_name='Cena produktu',
+                               help_text='Zadejte cenu produktu v Kč/m² - Pouze u podlah| Ostatně Kč/ks')
+    baleni = models.DecimalField(default=1, verbose_name='Obsah balení', decimal_places=2, max_digits=10,
+                                 help_text='Zadejte počet metrů čtverečních v balení',
+                                 validators=[MinValueValidator(0.1), MaxValueValidator(7)])
 
     # CharField - textové pole
     # blank=True - pole může být prázdné
@@ -133,7 +136,7 @@ class Produkt(models.Model):
     # vrací název produktu a cenu produktu v Kč
     def __str__(self):
         brand_names = ", ".join([str(brand) for brand in self.brand.all()])
-        return f'{brand_names} - {self.cena} Kč/m³ {self.kategorie}'
+        return f'| {brand_names} | {self.cena} Kč/m³ | {self.kategorie} | {self.baleni}m² |'
 
 
 class Zakaznik(models.Model):

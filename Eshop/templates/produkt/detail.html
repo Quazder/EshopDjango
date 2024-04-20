@@ -1,5 +1,6 @@
 {% extends 'hlavni/base.html' %}
 {% load static %}
+{% load multiply %}
 {% block extra_js %}
     <script src="{% static 'js/scripts.js' %}"></script>
 {% endblock %}
@@ -12,7 +13,7 @@
             <div class="row g-0">
                 <div class="col-md-4">
                     <div class="card-img-top" style=" overflow: hidden;">
-                        <img src="{{ produkt.closeup_fotka.url }}" class="img-fluid zoomable "  alt="..." style="width: 900px; height: 500px;">
+                        <img src="{{ produkt.closeup_fotka.url }}" class="img-fluid zoomable "  alt="..." style="width: 100%; height: 100%;">
                     </div>
                 </div>
                 <div class="col-md-8">
@@ -30,9 +31,24 @@
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">Materiál: <b>{{ produkt.material|capfirst }}</b></li>
                             <li class="list-group-item">Cena za metr čtverečný: <b>{{ produkt.cena }} Kč</b></li>
-                            <li class="list-group-item">V balení: <b>DODELAT v Models</b></li>
-                            <li class="list-group-item">Za balení: <b>DODELAT v Models</b></li>
-                            <li class="list-group-item">Kalkulačka <b>Kalkulačka</b></li>
+                            <li class="list-group-item">V balení: <b>{{ produkt.baleni }} m²</b></li>
+
+                            <div id="package-size" style="display: none;">{{ produkt.baleni }}</div>
+                            {% with total_price=produkt.cena|multiply:produkt.baleni %}
+                            <li class="list-group-item">Za balení: <b id="total-price">{{ total_price }} Kč</b></li>
+                            {% endwith %}
+                            <li class="list-group-item">
+                                <div class="pb-3 fw-bold text-decoration-underline"><h4>Kalkulačka</h4></div>
+                                <form id="calculator-form">
+                                    X: <label for="x-value"></label><input type="number" id="x-value" min="0">
+                                    Y: <label for="y-value"></label><input type="number" id="y-value" min="0">
+                                    <button type="button" onclick="calculateArea()">Calculate</button>
+                                </form>
+                                <b id="area-result">0</b> m², <b id="package-result">0</b> balení
+                                <div id="price-per-package" style="display: none;">{{ produkt.cena }}</div>
+                                <b id="cost-result" class="price-result">0</b> Kč
+                                <button class="btn-custom" id="add-to-cart">Add to Cart</button>
+                            </li>
                         <!--
                             <li class="list-group-item">
                                 Akce:

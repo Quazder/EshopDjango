@@ -71,6 +71,7 @@
                                     {% for brand in produkt.brand.all %}
                                         <a class="aer" href="{% url 'značka_podlahy' brand.nazev %}"><h5 class="fw-bolder">{{ brand.nazev|capfirst }}</h5></a>
                                     {% endfor %}
+                                <br>
                                     <!-- Product price-->
                                     {{ produkt.cena }} Kč/m2
                                 </div>
