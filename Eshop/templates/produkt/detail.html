@@ -24,15 +24,19 @@
                                     <div class="underline-text2"></div>
                                 </a>
                                 <br>
-                                <a class="aer" href=""><h5>{{ produkt.kategorie.nazev|capfirst }}</h5></a>
+                                <h5><b>{{ produkt.kategorie.nazev|capfirst }}</b></h5>
                             </div>
                         {% endfor %}
-                        <p class="price">{{ produkt.cena }} Kč/m²</p>
-                        <p class="description">{{ produkt.popis }}</p>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item">ID: {{ produkt.id }}</li>
+                            <li class="list-group-item">Materiál: <b>{{ produkt.material|capfirst }}</b></li>
+                            <li class="list-group-item">Cena za metr čtverečný: <b>{{ produkt.cena }} Kč</b></li>
+                            <li class="list-group-item">V balení: <b>DODELAT v Models</b></li>
+                            <li class="list-group-item">Za balení: <b>DODELAT v Models</b></li>
+                            <li class="list-group-item">Kalkulačka <b>Kalkulačka</b></li>
+                        <!--
                             <li class="list-group-item">
                                 Akce:
+
                                 {% if produkt.je_akce %}
                                     <div class="d-flex small text-warning mb-2">
                                         <div class="bi-star-fill"></div>
@@ -41,6 +45,7 @@
                                     </div>
                                 {% endif %}
                             </li>
+                        -->
                         </ul>
                         <div class="actions pt-3">
                             <a href="{% url 'hlavni_stranka' %}" class="btn" id="domek">
