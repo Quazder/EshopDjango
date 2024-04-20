@@ -3,7 +3,7 @@
 
 /*=============== VARIABLES CSS ===============*/
 :root {
-  --header-height: 3.5rem;
+  --header-height: 4rem;
 
   /*========== Colors ==========*/
   /*Color mode HSL(hue, saturation, lightness)*/
@@ -146,12 +146,6 @@ img {
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-
-.nav__logo {
-  color: var(--title-color);
-  font-weight: var(--font-semi-bold);
-  transition: color .4s;
 }
 
 .nav__actions {
@@ -395,3 +389,18 @@ img {
     margin-inline: auto;
   }
 }
+
+#logo {
+    background-image: url('/static/assets/logo.png');
+    height: 60px;
+    width: 150px;
+    background-size: contain;
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+}
+
+
+#logo:hover {
+    transform: scale(1.15);
+    transition: transform 0.3s ease-in-out;
+}
+
