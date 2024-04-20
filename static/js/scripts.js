@@ -78,7 +78,7 @@ function calculateArea() {
     const packageSize = parseFloat(document.getElementById('package-size').textContent);
     const pricePerPackage = parseFloat(document.getElementById('price-per-package').textContent);
 
-    let packagesNeeded = Math.round(result / packageSize); // Use Math.round to round to the nearest whole number
+    let packagesNeeded = Math.round( result / packageSize); // Use Math.round to round to the nearest whole number
 
     // Calculate the cost
     let cost = result * pricePerPackage;

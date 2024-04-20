@@ -1,3 +1,13 @@
 # Virtuální prosředí Pythonu (virtualenv) - vytvořené pomocí .venv
 .venv
 .xml
+.idea
+*.iml
+*.ipynb_checkpoints
+*.pyc
+*.pyo
+*.replit
+*.sage.py
+*.sage.py.bak
+*.sage.pyo
+*.sage.py.save

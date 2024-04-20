@@ -419,7 +419,7 @@ img {
 
 
 .product-card .card-body {
-    margin-left: 30px;
+    padding: 1.5rem;
 }
 
 .product-card .list-group-item {
@@ -451,8 +451,27 @@ img {
     align-items: center;
 }
 
+.product-card .card-img-top {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    object-fit: cover;
+}
 
+.product-card .card-img-top img {
+    border: none;
+    max-height: 500px;
+    width: 380px; /* Změna šířky obrázku na 100% */
+    object-fit: cover; /* Přidání vlastnosti object-fit */
+}
 
+.product-card .card-img-top-wrapper {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 .container-lg {
     display: flex;
@@ -492,9 +511,7 @@ img {
 
 .product-card {
     border: none;
-    -webkit-box-shadow: 21px 31px 36px -12px rgba(0,0,0,0.98);
--moz-box-shadow: 21px 31px 36px -12px rgba(0,0,0,0.98);
-box-shadow: 21px 31px 36px -12px rgba(0,0,0,0.98);
+    box-shadow: 9px 8px 12px 0px #3b3b3b, 24px 27px 68px 0px #000000, 1px 1px 0px 1px #000000;
     max-width: 1500px;
     border-radius: 10px;
 }
@@ -644,26 +661,21 @@ box-shadow: 21px 31px 36px -12px rgba(0,0,0,0.98);
   align-items: center;
 }
 
-
-
 .recenze-section {
   margin-top: 3rem;
   border-top: 1px solid #ccc;
   padding-top: 1.5rem;
 }
 
-
-
-.card-img-top {
-    height: 500px; /* Nastavte výšku podle vašich potřeb */
-    overflow: hidden; /* Skryje části obrázku, které přesahují nastavenou výšku */
+.recenze-section {
+  padding: 2rem 0;
+  border-top: 1px solid #ccc;
 }
 
-.card-img-top img {
-    height: 100%; /* Nastaví výšku obrázku na 100% rodičovského elementu */
-    object-fit: cover; /* Zajistí, že obrázek pokryje celý rodičovský element */
+.recenze {
+  margin-top: 2rem;
 }
-.col-md-7 {
-    padding-top: 10px; /* Nastavte hodnotu podle vašich potřeb */
-    padding-right: 32px;
+
+.text-area {
+  height: 200px;
 }
