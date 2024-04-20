@@ -49,6 +49,7 @@ html {
   scroll-behavior: smooth;
 }
 
+
 body,
 input,
 button {
@@ -57,8 +58,8 @@ button {
 }
 
 body {
-  background-color: var(--body-color);
   color: var(--text-color);
+background: linear-gradient(0deg, #8f8f8f 0%, #ffffff 100%);
 }
 
 input,
@@ -137,7 +138,7 @@ img {
   left: 0;
   width: 100%;
   background-color: var(--body-color);
-  box-shadow: 0 2px 16px hsla(230, 75%, 32%, .15);
+  box-shadow: rgb(17, 40, 60) 0px 20px 30px -10px;
   z-index: var(--z-fixed);
 }
 
@@ -510,11 +511,15 @@ img {
 
 .product-card {
     border: none;
-    box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
-    border-radius: 10px;
-    overflow: hidden;
-    display: flex;
-    flex-wrap: wrap;
-    margin: 1.5rem 0;
+    box-shadow: 9px 8px 12px 0px #3b3b3b, 24px 27px 68px 0px #000000, 1px 1px 0px 1px #000000;
     max-width: 1500px;
+}
+
+.zoomable {
+    transition: transform 0.5s ease-in-out; /* Increase transition duration for smoother effect */
+    object-fit: cover;
+}
+.zoomable:hover {
+    transform: scale(1.5); /* Increase scale value for larger zoom */
+    cursor: crosshair;
 }

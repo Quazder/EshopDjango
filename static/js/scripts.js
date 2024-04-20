@@ -31,3 +31,16 @@ window.onload = function() {
     });
 };
 
+
+/*ZOOM FOTKY*/
+document.addEventListener('DOMContentLoaded', function() {
+    const img = document.querySelector('.zoomable');
+    img.addEventListener('mousemove', function(e) {
+        const x = e.clientX - e.target.offsetLeft;
+        const y = e.clientY - e.target.offsetTop;
+        e.target.style.transformOrigin = `${x}px ${y}px`;
+    });
+    img.addEventListener('mouseleave', function(e) {
+        e.target.style.transformOrigin = 'center center';
+    });
+});
