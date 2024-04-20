@@ -16,25 +16,19 @@
 
         <div class="product-card">
             <div class="row g-0">
-                <div class="col-md-4">
+                <div class="col-md-5">
                     <div class="card-img-top" style=" overflow: hidden;">
                         <img src="{{ produkt.closeup_fotka.url }}" class="img-fluid zoomable "  alt="..." style="width: 100%; height: 100%;">
                     </div>
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-7">
                     <div class="card-body">
-                        {% for brand in produkt.brand.all %}
-                            <div>
-                                <a class="aer" href="{% url 'značka_podlahy' brand.nazev %}">
-                                    <h5 class="fw-bolder">{{ brand.nazev|capfirst }}</h5>
-                                    <div class="underline-text2"></div>
-                                </a>
-                                <br>
-                                <h5><b>{{ produkt.kategorie.nazev|capfirst }}</b></h5>
-                            </div>
-                        {% endfor %}
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Materiál: <b>{{ produkt.material|capfirst }}</b></li>
+                            {% for brand in produkt.brand.all %}
+                                <li class="list-group-item">Brand: <b><a class="aer" href="{% url 'značka_podlahy' brand.nazev %}">{{ brand.nazev|capfirst }}</a></b></li>
+                                <li class="list-group-item">Typ: <b><a class="aer" href="{% url 'kategorie_podlahy' produkt.kategorie.nazev %}">{{ produkt.kategorie.nazev_jednotneCislo|capfirst }}</a></b></li>
+                            {% endfor %}
+                            <li class="list-group-item">Materiál: <b>{{ produkt.material }}</b></li>
                             <li class="list-group-item">Cena za metr čtverečný: <b>{{ produkt.cena }} Kč</b></li>
                             <li class="list-group-item">V balení: <b>{{ produkt.baleni }} m²</b></li>
 
@@ -54,31 +48,11 @@
                                 <b id="cost-result" class="price-result">0</b> Kč
                                 <button class="btn-custom" id="add-to-cart">Add to Cart</button>
                         </ul>
-                    <div class="recenze-section">
-
-                {% if user.is_authenticated %}
-                    <form method="POST" action="{% url 'add_recenze' produkt.id %}">
-                        {% csrf_token %}
-                        {{ form.as_p }}
-                        <button type="submit">Přidat recenzi</button>
-                    </form>
-                {% else %}
-                    <p>Musíte se <a href="{% url 'prihlaseni' %}">přihlásit</a> pro přidání recenze.</p>
-                {% endif %}
-
-                {% for recenze in recenze %}
-                    <div class="recenze">
-                        <h5>{{ recenze.user.username }}</h5>
-                        <p>{{ recenze.text }}</p>
-                        <p>{{ recenze.datum }}</p>
                     </div>
-                {% endfor %}
-            </div>
-        </div>
-
 
 
                 </div>
+                {% include 'doplnky/detail_recenze.html' %}
             </div>
         </div>
     </div>

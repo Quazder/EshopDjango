@@ -1,0 +1,20 @@
+<div class="recenze-section">
+
+                {% if user.is_authenticated %}
+                    <form method="POST" action="{% url 'add_recenze' produkt.id %}">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit">Přidat recenzi</button>
+                    </form>
+                {% else %}
+                    <p>Musíte se <a href="{% url 'prihlaseni' %}">přihlásit</a> pro přidání recenze.</p>
+                {% endif %}
+
+                {% for recenze in recenze %}
+                    <div class="recenze">
+                        <h5>{{ recenze.user.username }}</h5>
+                        <p>{{ recenze.text }}</p>
+                        <p>{{ recenze.datum }}</p>
+                    </div>
+                {% endfor %}
+</div>
