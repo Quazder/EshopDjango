@@ -1,12 +1,12 @@
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
 
-from .forms import SignUpForm, EditProfileForm
-from .models import Kategorie, Produkt, Zakaznik, Objednavka, Brand
+from .forms import SignUpForm, EditProfileForm, RecenzeForm
+from .models import Kategorie, Produkt, Zakaznik, Objednavka, Brand, Recenze
 
 
 # home - funkce, která zobrazuje hlavní stránku
@@ -22,11 +22,12 @@ def home(request):
 #       print(f"Brand: {brand}, Brand Name: {brand.nazev if brand else 'No Brand'}")
 
 # PodlahaDetail - funkce, která zobrazuje detail produktu - pk - primární klíč
+
 def PodlahaDetail(request, pk):
-    # objects.get(id=pk) - zobrazí produkt podle jeho id
     produkt = Produkt.objects.get(id=pk)
-    # render - vyobrazení stránky, v tomhle případě - detail.html, který se nachází v templatech
-    return render(request, 'produkt/detail.html', {'produkt': produkt})
+    recenze = Recenze.objects.filter(produkt=produkt)
+    form = RecenzeForm()
+    return render(request, 'produkt/detail.html', {'produkt': produkt, 'recenze': recenze, 'form': form})
 
 
 def PodlahaKategorie(request, foo):
@@ -124,3 +125,15 @@ def zmena_profilu(request):
 
     context = {'form': form}
     return render(request, 'uzivatele/zmenit_profil.html', context)
+
+
+def add_recenze(request, product_id):
+    produkt = get_object_or_404(Produkt, pk=product_id)
+    if request.method == "POST":
+        form = RecenzeForm(request.POST)
+        if form.is_valid():
+            recenze = form.save(commit=False)
+            recenze.user = request.user
+            recenze.produkt = produkt
+            recenze.save()
+    return redirect('detail_podlahy', pk=produkt.id)

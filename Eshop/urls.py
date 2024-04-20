@@ -14,5 +14,6 @@ urlpatterns = [
     path('cs/odhlášení/', views.odhlaseni_uzivatele, name='odhlaseni'),
     path('cs/zmena_hesla/', views.zmena_hesla, name='zmena_hesla'),
     path('cs/zmena_profilu/', views.zmena_profilu, name='zmena_profilu'),
+    path('produkt/<int:product_id>/add_recenze/', views.add_recenze, name='add_recenze'),
 
 ]

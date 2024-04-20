@@ -2,6 +2,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django import forms
 
+from Eshop.models import Recenze
+
 
 class EditProfileForm(UserChangeForm):
     password = forms.CharField(label="", widget=forms.TextInput(attrs={'type': 'hidden'}))
@@ -47,3 +49,9 @@ class SignUpForm(UserCreationForm):
         self.fields[
             'password2'].help_text = '<span class="form-text text-muted"><small>Zadejte stejné heslo ' \
                                      'znovu</small></span>'
+
+
+class RecenzeForm(forms.ModelForm):
+    class Meta:
+        model = Recenze
+        fields = ['text']
