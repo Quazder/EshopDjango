@@ -9,4 +9,8 @@ urlpatterns = [
     path('cs/<int:pk>', views.PodlahaDetail, name='detail_podlahy'),
     path('cs/kategorie/<str:foo>', views.PodlahaKategorie, name='kategorie_podlahy'),
     path('cs/brand/<str:brand>', views.BrandKategorie, name='značka_podlahy'),
+    path('cs/přihlášení/', views.prihlaseni_uzivatele, name='prihlaseni'),
+    path('cs/registrace/', views.registrace_uzivatele, name='registrace'),
+    path('cs/odhlášení/', views.odhlaseni_uzivatele, name='odhlaseni'),
+
 ]

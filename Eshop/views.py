@@ -1,7 +1,10 @@
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
+
+from .forms import SignUpForm
 from .models import Kategorie, Produkt, Zakaznik, Objednavka, Brand
 
 
@@ -9,6 +12,7 @@ from .models import Kategorie, Produkt, Zakaznik, Objednavka, Brand
 def home(request):
     produkty = Produkt.objects.all()
     return render(request, 'hlavni/home.html', {'produkty': produkty})
+
 
 # Nešel mi brand napojit - takhle jsem otestoval výpis do konzole
 # jestli funguje a chyba není v samotném model popřípadě views/urls propojení ale v templatu a url odkazu na něj
@@ -48,3 +52,45 @@ def BrandKategorie(request, brand):
     except Brand.DoesNotExist:
         messages.success(request, "Tahle kategorie neexistuje")
         return redirect('hlavni_stranka')
+
+
+def prihlaseni_uzivatele(request):
+    if request.method == "POST":
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            messages.success(request, "Přihlášení proběhlo úspěšně.")
+            return redirect('hlavni_stranka')
+        else:
+            messages.success(request, "Operace se nezdařila, prosím, zkuste to znovu.")
+            return redirect('login  ')
+
+    else:
+        return render(request, 'uzivatele/login.html', {})
+
+
+def registrace_uzivatele(request):
+    form = SignUpForm()
+    if request.method == "POST":
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password1']
+            user = authenticate(username=username, password=password)
+            login(request, user)
+            messages.success(request, "Registrace proběhla úspěšně.")
+            return redirect('hlavni_stranka')
+        else:
+            messages.success(request, "Operace se nezdařila, prosím, zkuste to znovu.")
+            return redirect('registrace')
+    else:
+        return render(request, 'uzivatele/registrace.html', {'form': form})
+
+
+def odhlaseni_uzivatele(request):
+    logout(request)
+    messages.success(request, "Odhlášení proběhlo úspěšně.")
+    return redirect('hlavni_stranka')

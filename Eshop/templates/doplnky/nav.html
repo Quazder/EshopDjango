@@ -11,10 +11,10 @@
 
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                         {% if user.is_authenticated %}
-                            <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-box-arrow-right"></i></a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'odhlaseni' %}"><i class="bi bi-box-arrow-right"></i></a></li>
                         {% else %}
-                            <li class="nav-item"><a class="nav-link" href="#">Login</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Registrace</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'prihlaseni' %}">Login</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'registrace' %}">Registrace</a></li>
                         {% endif %}
 
 
