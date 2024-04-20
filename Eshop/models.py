@@ -5,7 +5,8 @@ from django.db import models
 class Kategorie(models.Model):
     nazev = models.CharField(max_length=50, verbose_name='Název kategorie', help_text='Vytvořte novou kategorii',
                              unique=True)
-    popis = models.CharField(max_length=500, default='', blank=True, null=True, verbose_name='Popis kategorie')
+    nazev_jednotneCislo = models.CharField(max_length=50, verbose_name='Název kategorie v jednotném čísle', null=True)
+    popis = models.TextField(max_length=500, default='', blank=True, null=True, verbose_name='Popis kategorie')
 
     class Meta:
         verbose_name = 'Kategorie'

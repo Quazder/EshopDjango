@@ -66,11 +66,11 @@
                             <div class="card-body p-4">
                                 <div class="text-center">
                                     <!-- Product name-->
-                                    <h5 class="fw-bolder">{{ produkt.nazev }}</h5>
+                                    {% for brand in produkt.brand.all %}
+                                        <a class="aer" href="{% url 'značka_podlahy' brand.nazev %}"><h5 class="fw-bolder">{{ brand.nazev|capfirst }}</h5></a>
+                                    {% endfor %}
                                     <!-- Product price-->
                                     {{ produkt.cena }} Kč/m2
-                                    <br/>
-                                    {{ produkt.popis }}
                                 </div>
                             </div>
                             <!-- Product actions-->
