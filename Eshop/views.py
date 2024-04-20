@@ -8,10 +8,13 @@ from .models import Kategorie, Produkt, Zakaznik, Objednavka, Brand
 # home - funkce, která zobrazuje hlavní stránku
 def home(request):
     produkty = Produkt.objects.all()
-    for produkt in produkty:
-        brand = produkt.brand.all().first()
-        print(f"Brand: {brand}, Brand Name: {brand.nazev if brand else 'No Brand'}")
     return render(request, 'hlavni/home.html', {'produkty': produkty})
+
+# Nešel mi brand napojit - takhle jsem otestoval výpis do konzole
+# jestli funguje a chyba není v samotném model popřípadě views/urls propojení ale v templatu a url odkazu na něj
+#    for produkt in produkty:
+#        brand = produkt.brand.all().first()
+#       print(f"Brand: {brand}, Brand Name: {brand.nazev if brand else 'No Brand'}")
 
 # PodlahaDetail - funkce, která zobrazuje detail produktu - pk - primární klíč
 def PodlahaDetail(request, pk):
