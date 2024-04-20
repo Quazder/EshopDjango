@@ -404,3 +404,117 @@ img {
     transition: transform 0.3s ease-in-out;
 }
 
+.underline-text {
+    border-bottom: 5px solid #93f2ff; /* Adjust thickness and color as needed */
+    width: 60px; /* Adjust width as needed */
+    border-radius: 50%;
+    margin: -2px auto 8px;
+}
+
+.product-image2 {
+    width: 100%; /* Zvětšení šířky obrázku na 100% */
+    max-width: 600px; /* Omezení maximální šířky obrázku na 600px */
+}
+
+
+.product-card .card-body {
+    padding: 1.5rem;
+}
+
+.product-card .list-group-item {
+    padding: 0.75rem 1.25rem;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.product-card .list-group-item:last-child {
+    border-bottom: none;
+}
+
+.product-card .btn-group {
+    margin-top: 1rem;
+}
+
+.product-card .price {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.product-card .description {
+    margin-bottom: 1rem;
+}
+
+.product-card .actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.product-card .card-img-top {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    object-fit: cover;
+}
+
+.product-card .card-img-top img {
+    border: none;
+    max-height: 100%;
+    width: 120%; /* Změna šířky obrázku na 100% */
+    object-fit: cover; /* Přidání vlastnosti object-fit */
+}
+
+.product-card .card-img-top-wrapper {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-lg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Výška rodičovského elementu nastavena na 100% výšky obrazovky */
+}
+
+.btn-secondary {
+    background-color: transparent; /* Odstranění šedé okolní barvy */
+}
+
+.btn-secondary:hover {
+    transform: none; /* Odstranění efektu přejetí myši */
+    transition: none; /* Odstranění animace při přejetí myši */
+}
+
+#add-cart:hover {
+    color: white !important; /* Změna barvy textu na bílou při přejetí myši */
+    background-color: black; /* Změna barvy pozadí na černou při přejetí myši */
+    transform: scale(1.1); /* Zvětšení textu při přejetí myši */
+    transition: all 0.3s ease-in-out; /* Plynulý přechod efektů */
+}
+.bi-house {
+    transform: scale(1.2); /* Statické zvětšení ikony o 20% */
+}
+
+.bi-house:hover {
+    transform: scale(1.4); /* Zvětšení ikony při přejetí myši */
+    transition: all 0.3s ease-in-out; /* Plynulý přechod efektů */
+}
+
+#domek {
+    display: inline-block;
+    line-height: 0;
+}
+
+.product-card {
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 1.5rem 0;
+    max-width: 1500px;
+}

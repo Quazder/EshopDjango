@@ -1,46 +1,47 @@
 {% extends 'hlavni/base.html' %}
-
-{% block title %}
-{% endblock %}
-
+{% load static %}
+<link href="{% static 'css/text.css' %}" rel="stylesheet">
 {% block content %}
-    <div class="container">
-
-    <div class="card mb-3">
-  <div class="row g-0">
-    <div class="col-md-4">
-      <img src="{{ produkt.fotka.url }}" class="img-fluid rounded-start" alt="...">
-    </div>
-    <div class="col-md-8">
-      <div class="card-body">
-        <h5 class="card-title">{{ produkt.nazev }}</h5>
-        <p class="card-text">{{ produkt.popis }}.</p>
-
-          {% if produkt.je_akce %}
-
-              <div class="d-flex small text-warning mb-2">
-                  <div class="bi-star-fill"></div>
-                  &nbsp;&nbsp;Na skladě&nbsp;&nbsp;
-                  <div class="bi-star-fill"></div>
-              </div>
-
-              <strike>${{ product.price }}</strike>
-              ${{ produkt.akce_cena }}
-              <br/>
-              {{ produkt.popis }}
-
-          {% else %}
-              ${{ produkt.cena }}
-              <br/>ID: {{ produkt.id }}
-          {% endif %}
-
-          <a href="{% url 'hlavni_stranka' %}" class="btn btn-secondary">Home</a>
-          <button type="button" value="{{ produkt.id }}" class="btn btn-secondary" id="add-cart">Přidat do košíku</button>
-
-      </div>
-    </div>
-  </div>
-</div>
-
+    <div class="pt-5"></div>
+    <div class="pt-5"></div>
+    <div class="container-lg">
+        <div class="product-card">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <div class="card-img-top" style="height: 100%; overflow: hidden; padding: 10px;">
+                        <img src="{{ produkt.closeup_fotka.url }}" class="img-fluid img-thumbnail" alt="..." style="width: 750px; height: 500px;">
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ produkt.nazev }}</h5>
+                        <p class="price">${{ produkt.cena }}</p>
+                        <p class="description">{{ produkt.popis }}</p>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">ID: {{ produkt.id }}</li>
+                            <li class="list-group-item">
+                                Akce:
+                                {% if produkt.je_akce %}
+                                    <div class="d-flex small text-warning mb-2">
+                                        <div class="bi-star-fill"></div>
+                                        &nbsp;&nbsp;Na skladě&nbsp;&nbsp;
+                                        <div class="bi-star-fill"></div>
+                                    </div>
+                                {% endif %}
+                            </li>
+                        </ul>
+                        <div class="actions pt-3">
+                            <a href="{% url 'hlavni_stranka' %}" class="btn" id="domek">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" class="bi bi-house" viewBox="0 0 16 16"> <!-- Změna barvy ikony domečku na černou -->
+                                    <path fill-rule="evenodd" d="M2 13.5V7h1v6.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V7h1v6.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5zm11-10V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"></path>
+                                    <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6 6a1 1 0 0 1-1.414 1.414L8 4.414 2.707 8.914A1 1 0 1 1 1.293 7.5l6-6z"></path>
+                                </svg>
+                            </a>
+                            <button type="button" value="{{ produkt.id }}" class="btn text-black fw-semibold border border-4 border-dark" id="add-cart">Přidat do košíku</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}
