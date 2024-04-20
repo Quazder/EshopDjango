@@ -1,132 +1,45 @@
 {% load static %}
 <link href="{% static 'css/text.css' %}" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css">
-   <body>
-      <!--==================== HEADER ====================-->
       <header class="header" id="header">
-         <nav class="nav container">
-            <a href="{% url 'hlavni_stranka' %}">
-                <div id="logo"></div>
-            </a>
-             <li class="nav-item dropdown">
+          <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container px-4 px-lg-5">
+                <a id="logo" href="{% url 'hlavni_stranka' %}"></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">&#9776;</a>
-
-                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-
-                     <li><a class="dropdown-item" href="{% url 'hlavni_stranka' %}">Všechny produkty</a></li>
-
-                     <li><hr class="dropdown-divider" /></li>
-
-                     <li><a class="dropdown-item" href="{% url 'kategorie_podlahy' 'Dřevěné podlahy' %}">Dřevěné</a></li>
-
-                     <li><a class="dropdown-item" href="{% url 'kategorie_podlahy' 'Vinylové podlahy' %}">Vinylové</a></li>
-
-                     <li><a class="dropdown-item" href="{% url 'kategorie_podlahy' 'Laminátové podlahy' %}">Laminátové</a></li>
-
-                     <li><a class="dropdown-item" href="{% url 'kategorie_podlahy' 'Koberce' %}">Koberce</a></li>
-
-                 </ul>
-
-             </li>
-
-            <div class="nav__menu" id="nav-menu">
-               <ul class="nav__list">
-
-
-                   {% if user.is_authenticated %}
-                  <li class="nav__item">
-                     <a href="#" class="nav__link">Odhlásit se</a>
-                  </li>
-                   {% else %}
-
-                  <li class="nav__item">
-                     <a href="#" class="nav__link">Zaregistrovat se</a>
-                  </li>
-
-                  <li class="nav__item">
-                     <a href="#" class="nav__link">Přihlásit se</a>
-                  </li>
-                   {% endif %}
-               </ul>
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                        {% if user.is_authenticated %}
+                            <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-box-arrow-right"></i></a></li>
+                        {% else %}
+                            <li class="nav-item"><a class="nav-link" href="#">Login</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">Registrace</a></li>
+                        {% endif %}
 
 
 
-               <!-- Close button -->
-               <div class="nav__close" id="nav-close">
-                  <i class="ri-close-line"></i>
-               </div>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">&#9776;</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <li><a class="dropdown-item" href="{% url 'hlavni_stranka' %}">Všechny produkty</a></li>
+                                        <li><hr class="dropdown-divider" /></li>
+                                        <li><a class="dropdown-item" href="{% url 'kategorie_podlahy' 'Dřevěné podlahy' %}">Dřevěné</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'kategorie_podlahy' 'Vinylové podlahy' %}">Vinylové</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'kategorie_podlahy' 'Laminátové podlahy' %}">Laminátové</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'kategorie_podlahy' 'Koberce' %}">Koberce</a></li>
+                                    </ul>
+                        </li>
+                    </ul>
+
+                    <form class="d-flex">
+                        <a href="#" class="btn btn-outline-dark"><i class="bi-cart-fill me-1"></i>
+                            Košík
+                            <span class="badge bg-dark text-white ms-1 rounded-pill">0</span></a>
+
+                    </form>
+                </div>
             </div>
+        </nav>
 
-
-            <div class="nav__actions">
-               <!-- Search button -->
-               <i class="ri-search-line nav__search" id="search-btn"></i>
-
-               <!-- Login button -->
-
-               <!--
-               <i class="ri-user-line nav__login" id="login-btn"></i>
-               -->
-                <a href="" class="btn btn-outline-dark rounded p-2">
-                    <i class="bi3 bi-cart-fill"></i> <!-- Třída ikony košíku Bootstrap -->
-                    <span class="badge bg-dark text-white position-absolute top-0 start-100 translate-middle badge-overlap">0</span>
-                </a>
-
-               <!-- Toggle button -->
-               <div class="nav__toggle" id="nav-toggle">
-                  <i class="ri-menu-line"></i>
-               </div>
-            </div>
-         </nav>
       </header>
-
-      <!--==================== SEARCH ====================-->
-      <div class="search" id="search">
-         <form action="" class="search__form">
-            <i class="ri-search-line search__icon"></i>
-            <input type="search" placeholder="What are you looking for?" class="search__input">
-         </form>
-
-         <i class="ri-close-line search__close" id="search-close"></i>
-      </div>
-
-      <!--==================== LOGIN ====================-->
-      <div class="login" id="login">
-         <form action="" class="login__form">
-            <h2 class="login__title">Log In</h2>
-
-            <div class="login__group">
-               <div>
-                  <label for="email" class="login__label">Email</label>
-                  <input type="email" placeholder="Write your email" id="email" class="login__input">
-               </div>
-
-               <div>
-                  <label for="password" class="login__label">Password</label>
-                  <input type="password" placeholder="Enter your password" id="password" class="login__input">
-               </div>
-            </div>
-
-            <div>
-               <p class="login__signup">
-                  You do not have an account? <a href="#">Sign up</a>
-               </p>
-
-               <a href="#" class="login__forgot">
-                  You forgot your password
-               </a>
-
-               <button type="submit" class="login__button">Log In</button>
-            </div>
-         </form>
-
-         <i class="ri-close-line login__close" id="login-close"></i>
-      </div>
-
-      <!--==================== MAIN ====================-->
-
-
-      <!--=============== MAIN JS ===============-->
-    <script src="{% static 'js/scripts.js' %}"></script>
-   </body>
