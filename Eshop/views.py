@@ -2,15 +2,16 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
-from .models import Kategorie, Produkt, Zakaznik, Objednavka
+from .models import Kategorie, Produkt, Zakaznik, Objednavka, Brand
 
 
 # home - funkce, která zobrazuje hlavní stránku
 def home(request):
-    # objects.all() - zobrazí všechny produkty
     produkty = Produkt.objects.all()
+    for produkt in produkty:
+        brand = produkt.brand.all().first()
+        print(f"Brand: {brand}, Brand Name: {brand.nazev if brand else 'No Brand'}")
     return render(request, 'hlavni/home.html', {'produkty': produkty})
-
 
 # PodlahaDetail - funkce, která zobrazuje detail produktu - pk - primární klíč
 def PodlahaDetail(request, pk):
@@ -32,4 +33,15 @@ def PodlahaKategorie(request, foo):
         return render(request, 'produkt/list.html', {'produkty': produkty, 'kategorie': kategorie})
     except Kategorie.DoesNotExist:
         messages.success(request, "Tahle kategorie neexistuje.")
+        return redirect('hlavni_stranka')
+
+
+def BrandKategorie(request, brand):
+    # get the brand
+    try:
+        brand_instance = Brand.objects.get(nazev=brand)
+        produkty = brand_instance.produkt_set.all()
+        return render(request, 'produkt/list_brandy.html', {'produkty': produkty, 'brand': brand_instance})
+    except Brand.DoesNotExist:
+        messages.success(request, "Tahle kategorie neexistuje")
         return redirect('hlavni_stranka')
