@@ -513,13 +513,44 @@ img {
     border: none;
     box-shadow: 9px 8px 12px 0px #3b3b3b, 24px 27px 68px 0px #000000, 1px 1px 0px 1px #000000;
     max-width: 1500px;
+    border-radius: 10px;
 }
 
 .zoomable {
     transition: transform 0.5s ease-in-out; /* Increase transition duration for smoother effect */
     object-fit: cover;
 }
+
 .zoomable:hover {
     transform: scale(1.5); /* Increase scale value for larger zoom */
     cursor: crosshair;
+}
+
+.cube {
+  transform: scaleX(1) scaleY(1) scaleZ(1.2) rotateX(21deg) rotateY(19deg) rotateZ(1deg) translateX(0px) translateY(0px) translateZ(0px) skewX(0deg) skewY(0deg);
+}
+
+/* V home.css*/
+.aer {
+    display: inline-block;
+}
+
+.aer h5 {
+    display: inline-block;
+}
+
+.aer2 {
+    display: inline-block;
+}
+
+.aer2 h5 {
+    display: inline-block;
+}
+
+.underline-text2 {
+    border-bottom: 5px solid; /* Adjust thickness and color as needed */
+    color: #968f2c;
+    border-radius: 10%;
+    margin-top: -12px;
+    margin-bottom: 10px;
 }

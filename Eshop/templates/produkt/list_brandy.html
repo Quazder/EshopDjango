@@ -68,7 +68,7 @@
                             <div class="card-body p-4">
                                 <div class="text-center">
                                     <!-- Product name-->
-                                    <a class="aer" href="{% url 'kategorie_podlahy' produkt.kategorie.nazev %}"><h5 class="fw-bolder">{{ produkt.kategorie.nazev|capfirst }}</h5></a>
+                                    <a class="aer" href="{% url 'kategorie_podlahy' produkt.kategorie.nazev %}"><h5 class="fw-bolder">{{ produkt.kategorie.nazev_jednotneCislo|capfirst }}</h5></a>
                                     <!-- Product price-->
                                     {{ produkt.cena }} Kč/m2
                                     <br/>

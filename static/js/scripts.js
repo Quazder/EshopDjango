@@ -44,3 +44,16 @@ document.addEventListener('DOMContentLoaded', function() {
         e.target.style.transformOrigin = 'center center';
     });
 });
+
+/*Funkce pro zobrazování underline-text podtržení podle toho jak široký je text - název kategorie brandu*/
+window.addEventListener('load', function() {
+    // Najděte elementy na stránce
+    var brandElements = document.querySelectorAll('.aer h5');
+    var underlineElements = document.querySelectorAll('.underline-text2');
+
+    // Pro každý element brand a underline
+    for (var i = 0; i < brandElements.length; i++) {
+        // Nastavte šířku podtržení na šířku textu
+        underlineElements[i].style.width = brandElements[i].offsetWidth + 'px';
+    }
+});

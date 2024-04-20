@@ -1,5 +1,8 @@
 {% extends 'hlavni/base.html' %}
 {% load static %}
+{% block extra_js %}
+    <script src="{% static 'js/scripts.js' %}"></script>
+{% endblock %}
 <link href="{% static 'css/text.css' %}" rel="stylesheet">
 {% block content %}
     <div class="pt-5"></div>
@@ -9,13 +12,22 @@
             <div class="row g-0">
                 <div class="col-md-4">
                     <div class="card-img-top" style=" overflow: hidden;">
-                        <img src="{{ produkt.closeup_fotka.url }}" class="img-fluid zoomable" alt="..." style="width: 900px; height: 500px;">
+                        <img src="{{ produkt.closeup_fotka.url }}" class="img-fluid zoomable "  alt="..." style="width: 900px; height: 500px;">
                     </div>
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
-                        <h5 class="card-title">{{ produkt.nazev }}</h5>
-                        <p class="price">${{ produkt.cena }}</p>
+                        {% for brand in produkt.brand.all %}
+                            <div>
+                                <a class="aer" href="{% url 'značka_podlahy' brand.nazev %}">
+                                    <h5 class="fw-bolder">{{ brand.nazev|capfirst }}</h5>
+                                    <div class="underline-text2"></div>
+                                </a>
+                                <br>
+                                <a class="aer" href=""><h5>{{ produkt.kategorie.nazev|capfirst }}</h5></a>
+                            </div>
+                        {% endfor %}
+                        <p class="price">{{ produkt.cena }} Kč/m²</p>
                         <p class="description">{{ produkt.popis }}</p>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">ID: {{ produkt.id }}</li>
@@ -37,7 +49,7 @@
                                     <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6 6a1 1 0 0 1-1.414 1.414L8 4.414 2.707 8.914A1 1 0 1 1 1.293 7.5l6-6z"></path>
                                 </svg>
                             </a>
-                            <button type="button" value="{{ produkt.id }}" class="btn text-black fw-semibold border border-4 border-dark" id="add-cart">Přidat do košíku</button>
+                            <button type="button" value="{{ produkt.id }}" class="btn text-black fw-semibold border border-4 border-dark cube" id="add-cart">Přidat do košíku</button>
                         </div>
                     </div>
                 </div>

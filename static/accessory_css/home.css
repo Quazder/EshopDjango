@@ -37,5 +37,11 @@
 .aer {
     text-decoration: none;
     color: black;
-    font-weight: 750;
+    font-weight: 900;
+}
+
+.aer2 {
+    text-decoration: none;
+    color: black;
+    font-weight: 600;
 }
