@@ -67,7 +67,7 @@ class Produkt(models.Model):
     ]
 
     MATERIAL_CHOICES = [
-        (' ', ' '),
+        ('syntetický', 'Syntetický'),
         ('dub', 'Dub'),
         ('buk', 'Buk'),
         ('smrk', 'Smrk'),
