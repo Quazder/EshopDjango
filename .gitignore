@@ -2,13 +2,4 @@
 .venv
 .xml
 *.iml
-*.ipynb_checkpoints
-*.pyc
-*.pyo
-*.replit
-*.sage.py
-*.sage.py.bak
-*.sage.pyo
-*.sage.py.save
-.idea/
 .idea
