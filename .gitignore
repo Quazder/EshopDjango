@@ -10,4 +10,5 @@
 *.sage.py.bak
 *.sage.pyo
 *.sage.py.save
+.idea/
 .idea
