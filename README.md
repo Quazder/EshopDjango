@@ -36,8 +36,4 @@ Následujte tyto kroky pro spuštění projektu na vašem lokálním stroji pro 
     python manage.py runserver
     ```
    
-Nyní by měl být váš vývojový server spuštěn a dostupný na `http://localhost:8000/cs`.
-
-## Využité technologie
-
-- [GitHub Copilot](https://copilot.github.com/)
+Nyní by měl být váš vývojový server spuštěn a dostupný na `http://localhost:8000/cs`
