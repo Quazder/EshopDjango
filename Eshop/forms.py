@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django import forms
+from django.forms import Textarea
 
 from Eshop.models import Recenze
 
@@ -55,3 +56,9 @@ class RecenzeForm(forms.ModelForm):
     class Meta:
         model = Recenze
         fields = ['text']
+        widgets = {
+            'text': Textarea(attrs={'class': 'form-control review-textarea'}),
+        }
+        labels = {
+            'text': 'Napište recenzi',
+        }

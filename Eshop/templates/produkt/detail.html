@@ -1,115 +1,122 @@
-{% extends 'hlavni/base.html' %}
-{% load static %}
-{% load multiply %}
+{% extends 'hlavni/base.html' %} <!-- Rozšiřuje základní šablonu -->
+{% load static %} <!-- Načte statické soubory -->
+{% load multiply %} <!-- Načte vlastní šablonový filtr multiply -->
+
 {% block extra_js %}
+    <!-- Přidává externí JavaScript soubor -->
     <script src="{% static 'js/scripts.js' %}"></script>
 {% endblock %}
+
+<!-- Přidává externí CSS soubor -->
 <link href="{% static 'css/text.css' %}" rel="stylesheet">
+
 {% block content %}
+    <!-- Prázdné divy pro padding -->
     <div class="pt-5"></div>
     <div class="pt-5"></div>
     <div class="pt-5"></div>
     <div class="pt-5"></div>
+
+    <!-- Kontejner pro obsah -->
     <div class="container-md">
-
-
-
+        <!-- Karta produktu -->
         <div class="product-card">
+            <!-- Řádek bez gutters -->
             <div class="row g-0">
+                <!-- Sloupec pro obrázek produktu -->
                 <div class="col-md-4">
+                    <!-- Obrázek produktu -->
                     <div class="card-img-top" style=" overflow: hidden;">
                         <img src="{{ produkt.closeup_fotka.url }}" class="img-fluid zoomable "  alt="..." style="width: 100%; height: 100%;">
                     </div>
                 </div>
+
+                <!-- Sloupec pro detaily produktu -->
                 <div class="col-md-8">
-                    <div class="card-body">
+                    <!-- Tělo karty produktu -->
+                    <div class="card-body moveTOP">
+                        <!-- Cyklus pro všechny značky produktu -->
                         {% for brand in produkt.brand.all %}
                             <div>
+                                <!-- Odkaz na stránku značky -->
                                 <a class="aer" href="{% url 'značka_podlahy' brand.nazev %}">
+                                    <!-- Název značky -->
                                     <h5 class="fw-bolder">{{ brand.nazev|capfirst }}</h5>
+                                    <!-- Podtržení -->
                                     <div class="underline-text2"></div>
                                 </a>
                                 <br>
+                                <!-- Název kategorie produktu -->
                                 <h5><b>{{ produkt.kategorie.nazev|capfirst }}</b></h5>
                             </div>
                         {% endfor %}
+
+                        <!-- Seznam detailů produktu -->
                         <ul class="list-group list-group-flush">
+                            <!-- Materiál produktu -->
                             <li class="list-group-item">Materiál: <b>{{ produkt.material|capfirst }}</b></li>
+                            <!-- Cena za metr čtverečný -->
                             <li class="list-group-item">Cena za metr čtverečný: <b>{{ produkt.cena }} Kč</b></li>
+                            <!-- Množství v balení -->
                             <li class="list-group-item">V balení: <b>{{ produkt.baleni }} m²</b></li>
 
+                            <!-- Skrytý div pro velikost balení -->
                             <div id="package-size" style="display: none;">{{ produkt.baleni }}</div>
+
+                            <!-- Vypočítá celkovou cenu za balení -->
                             {% with total_price=produkt.cena|multiply:produkt.baleni %}
+                            <!-- Zobrazí celkovou cenu za balení -->
                             <li class="list-group-item">Za balení: <b id="total-price">{{ total_price }} Kč</b></li>
                             {% endwith %}
+
+                            <!-- Položka seznamu pro kalkulačku -->
                             <li class="list-group-item">
+                                <!-- Nadpis kalkulačky -->
                                 <div class="pb-3 fw-bold text-decoration-underline"><h4>Kalkulačka</h4></div>
-                                <form id="calculator-form">
-                                    X: <label for="x-value"></label><input type="number" id="x-value" min="0">
-                                    Y: <label for="y-value"></label><input type="number" id="y-value" min="0">
-                                    <button type="button" onclick="calculateArea()">Calculate</button>
+
+                                <!-- Formulář kalkulačky -->
+                                <form class="calculator-form">
+                                    X: <label for="x-value"></label><label>
+                                    <input type="number" class="x-value" min="0"> <!-- Vstup pro hodnotu X -->
+                                    </label>
+                                    Y: <label for="y-value"></label><label>
+                                    <input type="number" class="y-value" min="0"> <!-- Vstup pro hodnotu Y -->
+                                    </label>
+                                    <!-- Tlačítko pro vynulování hodnot -->
+                                    <button type="button" class="reset-button">Vynulovat</button>
+                                    <!-- Tlačítko pro výpočet -->
+                                    <button type="button" class="calculate-button">Vypočítat</button>
+                                    <br>
+                                    <br>
+                                    <br>
                                 </form>
-                                <b id="area-result">0</b> m², <b id="package-result">0</b> balení
-                                <div id="price-per-package" style="display: none;">{{ produkt.cena }}</div>
-                                <b id="cost-result" class="price-result">0</b> Kč
-                                <button class="btn-custom" id="add-to-cart">Add to Cart</button>
+
+                                <!-- Výsledek výpočtu plochy -->
+                                <b class="area-result">0</b> m²
+                                <!-- Skrytý div pro cenu za balení -->
+                                <div class="price-per-package" style="display: none;">{{ produkt.cena }}</div>
+                                <!-- Výsledek výpočtu ceny -->
+                                <b class="cost-result price-result">0</b> Kč
+                                <!-- Výsledek výpočtu počtu balení -->
+                                <b class="packages-needed">0</b> balení
+
+                                <!-- Odkaz na stránku košíku -->
+                                <a href="{% url 'kosik_stranka' %}">
+                                    <!-- Tlačítko Přidat do košíku -->
+                                    <button type="button" class="btn btn-primary text-white position-absolute end-0 bottom-0 m-3 px-3">
+                                        <!-- Ikonka košíku -->
+                                        <i class="fas fa-shopping-cart"></i>
+                                        <!-- Text tlačítka -->
+                                        <span class="hide-on-small">Přidat do košíku</span>
+                                    </button>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
+        <!-- Vloží šablonu recenzí -->
+        {% include 'doplnky/recenze.html' %}
     </div>
-    {% include 'doplnky/recenze.html' %}
-    <div class="pt-5"></div>
-    <div class="pt-5"></div>
-    <div class="pt-5"></div>
-{% endblock %}
-{% block extra_scripts %}
-    <script>
-        function calculateArea() {
-            const xValue = parseFloat(document.getElementById('x-value').value);
-            const yValue = parseFloat(document.getElementById('y-value').value);
-            const area = xValue * yValue;
-            const packageSize = parseFloat(document.getElementById('package-size').innerText);
-            const pricePerPackage = parseFloat(document.getElementById('price-per-package').innerText);
-            const packages = Math.ceil(area / packageSize);
-            const cost = packages * pricePerPackage;
-
-            document.getElementById('area-result').innerText = area.toFixed(2);
-            document.getElementById('package-result').innerText = packages;
-            document.getElementById('cost-result').innerText = cost.toFixed(2);
-        }
-
-        function addToCart() {
-            const productId = {{ produkt.id }};
-            const area = parseFloat(document.getElementById('area-result').innerText);
-            const packageResult = parseFloat(document.getElementById('package-result').innerText);
-            const costResult = parseFloat(document.getElementById('cost-result').innerText);
-
-            const payload = {
-                'productId': productId,
-                'area': area,
-                'packageResult': packageResult,
-                'costResult': costResult
-            };
-
-            fetch('{% url "add_to_cart" %}', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(payload)
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    alert('Produkt úspěšně přidán do košíku');
-                } else {
-                    alert('Něco se pokazilo, produkt se nepodařilo přidat do košíku');
-                }
-            });
-        }
-
-        document.getElementById('add-to-cart').addEventListener('click', addToCart);
-    </script>
 {% endblock %}

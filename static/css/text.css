@@ -419,7 +419,7 @@ img {
 
 
 .product-card .card-body {
-    padding: 1.5rem;
+    padding: 5rem;
 }
 
 .product-card .list-group-item {
@@ -451,6 +451,8 @@ img {
     align-items: center;
 }
 
+
+
 .product-card .card-img-top {
     height: 100%;
     display: flex;
@@ -461,7 +463,7 @@ img {
 
 .product-card .card-img-top img {
     border: none;
-    max-height: 500px;
+    max-height: 800px;
     width: 380px; /* Změna šířky obrázku na 100% */
     object-fit: cover; /* Přidání vlastnosti object-fit */
 }
@@ -499,14 +501,13 @@ img {
     transform: scale(1.2); /* Statické zvětšení ikony o 20% */
 }
 
+.moveTOP {
+    margin-bottom: 20px;
+}
+
 .bi-house:hover {
     transform: scale(1.4); /* Zvětšení ikony při přejetí myši */
     transition: all 0.3s ease-in-out; /* Plynulý přechod efektů */
-}
-
-#domek {
-    display: inline-block;
-    line-height: 0;
 }
 
 .product-card {
@@ -554,26 +555,45 @@ img {
 }
 
 #calculator-form input[type="number"] {
+    width: 50px; /* Zmenšení šířky inputů */
     border: 2px solid #000;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     padding: 5px;
     margin-right: 10px;
+    border-radius: 5px; /* Přidání zaoblených rohů */
+}
+
+.calculator-form .x-value,
+.calculator-form .y-value {
+    width: 50px; /* Zmenšení šířky inputů */
+    border: 2px solid #000;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    padding: 5px;
+    margin-right: 10px;
+    border-radius: 5px; /* Přidání zaoblených rohů */
 }
 
 #calculator-form button {
-    background-color: #4CAF50; /* Green background */
-    border: none; /* Remove border */
-    color: white; /* White text */
-    padding: 15px 32px; /* Some padding */
-    text-align: center; /* Centered text */
-    text-decoration: none; /* Remove underline */
-    display: inline-block;
-    font-size: 16px;
-    font-weight: 650;
-    margin: 4px 2px; /* Some margin */
-    cursor: pointer; /* Pointer/hand icon */
-    border-radius: 4px; /* Rounded corners */
-    transition-duration: 0.4s; /* Transition */
+  padding: 5px 10px;
+  font-size: 12px;
+  width: auto;
+  margin-right: 10px;
+}
+
+#calculator-form button:hover {
+  background-color: white;
+  color: black;
+  transform: scale(1.1);
+}
+
+#reset-button {
+  color: black;
+  transition-duration: 0.4s;
+}
+
+#tlacitka {
+  color: black;
+  transition-duration: 0.4s;
 }
 
 #calculator-form button:hover {
@@ -604,6 +624,44 @@ img {
     }
 }
 
+/* Styly pro velké obrazovky */
+@media (min-width: 1200px) {
+    .calculator-form button {
+        padding: 10px 20px; /* Zvětšení paddingu */
+        font-size: 16px; /* Zvětšení velikosti písma */
+    }
+}
+
+/* Styly pro malé obrazovky */
+@media (max-width: 767px) {
+    .hide-on-small {
+        display: none;
+    }
+}
+
+
+/* Styly pro malé obrazovky */
+@media (max-width: 767px) {
+    .calculator-form button {
+        padding: 5px 10px; /* Ještě menší padding */
+        font-size: 12px; /* Ještě menší velikost písma */
+        width: 100%; /* Tlačítka budou zabírat celou šířku */
+    }
+
+    .area-result, .cost-result, .packages-needed {
+        margin-top: 10px; /* Posunutí řádku s výsledky dolů */
+    }
+
+    a[href="{% url 'kosik_stranka' %}"] {
+        position: static; /* Zrušení absolutní pozice */
+        margin-top: 20px; /* Posunutí tlačítka dolů */
+    }
+
+    .btn.btn-primary.text-white.position-absolute.end-0.bottom-0.m-3.px-3 {
+        font-size: 12px; /* Zmenšení velikosti písma */
+        padding: 5px 10px; /* Zmenšení paddingu */
+    }
+}
 #area-result, #package-result {
     font-size: 1.5em; /* Increase the font size */
     color: #333; /* Change the text color */
@@ -612,29 +670,27 @@ img {
 
 .price-result {
     color: #ff0000; /* Change the color to red */
-    font-size: 20px; /* Increase the font size to 20px */
+    font-size: 15px; /* Increase the font size to 20px */
     font-weight: bold; /* Make the text bold */
 }
 
 .btn-custom {
-    background-color: #4CAF50; /* Green background */
-    border: none; /* Remove border */
-    color: white; /* White text */
-    padding: 15px 32px; /* Some padding */
-    text-align: center; /* Centered text */
-    text-decoration: none; /* Remove underline */
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px; /* Some margin */
-    cursor: pointer; /* Pointer/hand icon */
-    border-radius: 4px; /* Rounded corners */
-    transition-duration: 0.4s; /* Transition */
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition-duration: 0.4s;
 }
 
 .btn-custom:hover {
-    background-color: white; /* White background */
-    color: black; /* Black text */
-    transform: scale(1.1); /* Increase the size of the button */
+  background-color: white;
+  color: black;
+  transform: scale(1.1);
 }
 
 #add-to-cart {
@@ -662,9 +718,12 @@ img {
 }
 
 .recenze-section {
-  margin-top: 3rem;
-  border-top: 1px solid #ccc;
-  padding-top: 1.5rem;
+    margin-top: 3rem;
+    border-top: 1px solid #ccc;
+    padding-top: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 9px 8px 12px 0px #3b3b3b, 24px 27px 68px 0px #000000, 1px 1px 0px 1px #000000;
+
 }
 
 .recenze-section {
@@ -678,4 +737,68 @@ img {
 
 .text-area {
   height: 200px;
+}
+.btn-custom {
+    color: black;
+    margin-left: 10px;
+    margin-top: 10px;
+    padding: 10px 10px; /* Adjust padding as needed */
+    font-size: 14px; /* Adjust font size as needed */
+    width: auto; /* Allow the width to adjust to content */
+}
+
+.btn-group {
+    display: inline-flex;
+    border: 1px solid black;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.btn-group .btn-custom {
+    border: none;
+    transition: background-color 0.3s ease;
+    margin: 0;
+}
+
+.btn-group .btn-custom:hover {
+    background-color: #ddd;
+}
+
+.calculate-button, .reset-button {
+    background-color: #e7e7e7;
+    color: black; /* Change to white color */
+    border: none;
+    padding: 5px 10px; /* Adjust padding to make buttons smaller */
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px; /* Adjust font size to make buttons smaller */
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    float: right; /* Add this line */
+}
+
+.calculate-button:hover, .reset-button:hover {
+    background-color: white; /* Change to white color on hover */
+    color: black; /* Change text to black on hover */
+}
+
+.recenze-section {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.recenze {
+    border-bottom: 1px solid #dee2e6;
+    padding: 10px 0;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.review-textarea {
+    height: 100px; /* Nastavte výšku podle vašich potřeb */
 }

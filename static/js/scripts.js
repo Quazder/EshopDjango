@@ -2,16 +2,20 @@
 
 /*Funkce pro změnění fotky při hover efektu*/
 window.onload = function() {
+    // Najde dropdown menu
     var dropdown = document.getElementById('navbarDropdown');
     if (dropdown) {
+        // Přidá event listener, který zruší defaultní chování při kliknutí
         dropdown.addEventListener('click', function(event) {
             event.preventDefault();
             event.stopPropagation();
         }, true); // Add true to make the event handler execute in the capturing phase
     }
 
+    // Najde všechny karty produktů
     var cards = document.querySelectorAll('.card.h-100');
     cards.forEach(function(card) {
+        // Přidá event listener pro změnu obrázku při najetí myši
         card.addEventListener('mouseenter', function() {
             var imgOriginal = card.querySelector('.product-image.original');
             var imgCloseup = card.querySelector('.product-image.closeup');
@@ -20,6 +24,7 @@ window.onload = function() {
                 imgCloseup.style.opacity = 1;
             }
         });
+        // Přidá event listener pro změnu obrázku při odjetí myši
         card.addEventListener('mouseleave', function() {
             var imgOriginal = card.querySelector('.product-image.original');
             var imgCloseup = card.querySelector('.product-image.closeup');
@@ -34,60 +39,141 @@ window.onload = function() {
 
 /*ZOOM FOTKY*/
 document.addEventListener('DOMContentLoaded', function() {
+    // Najde obrázek, na který se má aplikovat zoom
     const img = document.querySelector('.zoomable');
     img.addEventListener('mousemove', function(e) {
+        // Vypočítá souřadnice kurzoru vůči obrázku
         const x = e.clientX - e.target.offsetLeft;
         const y = e.clientY - e.target.offsetTop;
+        // Nastaví transform-origin na souřadnice kurzoru
         e.target.style.transformOrigin = `${x}px ${y}px`;
     });
     img.addEventListener('mouseleave', function(e) {
+        // Nastaví transform-origin zpět na střed obrázku
         e.target.style.transformOrigin = 'center center';
     });
 });
 
 /*Funkce pro zobrazování underline-text podtržení podle toho jak široký je text - název kategorie brandu*/
 window.addEventListener('load', function() {
-    // Najděte elementy na stránce
+    // Najde elementy značky a podtržení na stránce
     var brandElements = document.querySelectorAll('.aer h5');
     var underlineElements = document.querySelectorAll('.underline-text2');
 
-    // Pro každý element brand a underline
+    // Pro každý element značky a podtržení
     for (var i = 0; i < brandElements.length; i++) {
-        // Nastavte šířku podtržení na šířku textu
+        // Nastaví šířku podtržení na šířku textu
         underlineElements[i].style.width = brandElements[i].offsetWidth + 'px';
     }
 });
 
 
-document.addEventListener('DOMContentLoaded', function() {
-    let priceElement = document.getElementById('total-price');
-    if (priceElement) {
-        let price = priceElement.textContent.replace(',', '.');
-        price = parseFloat(price);
-        priceElement.textContent = price.toString().replace('.', ',') + " Kč";
+function calculateArea(xValueElement, yValueElement, areaResultElement, costResultElement, pricePerPackageElement, packageSizeElement, packagesNeededElement) {
+    // Převede hodnoty na čísla
+    const xValue = parseFloat(xValueElement.value);
+    const yValue = parseFloat(yValueElement.value);
+
+    // Kontroluje, zda jsou vstupy neprázdné
+    if (isNaN(xValue) || isNaN(yValue)) {
+        alert('Prosím vyplňte pole před výpočtem.');
+        return;
     }
-});
 
-
-function calculateArea() {
-    const xValue = parseFloat(document.getElementById('x-value').value);
-    const yValue = parseFloat(document.getElementById('y-value').value);
+    // Vypočítá plochu
     let result = xValue * yValue;
 
-    // Get the package size and price per package from the hidden elements
-    const packageSize = parseFloat(document.getElementById('package-size').textContent);
-    const pricePerPackage = parseFloat(document.getElementById('price-per-package').textContent);
+    // Získá cenu za balení z hidden elementu
+    const pricePerPackage = parseFloat(pricePerPackageElement.textContent);
 
-    let packagesNeeded = Math.round( result / packageSize); // Use Math.round to round to the nearest whole number
-
-    // Calculate the cost
+    // Vypočítá cenu
     let cost = result * pricePerPackage;
 
-    // Update the area, package results and cost separately
-    document.getElementById('area-result').textContent = result.toFixed(2);
-    document.getElementById('package-result').textContent = packagesNeeded;
-    document.getElementById('cost-result').textContent = cost.toFixed(2);
+    // Vypočítá počet potřebných balení
+    const packageSize = parseFloat(packageSizeElement.textContent);
+    let packagesNeeded = Math.ceil(result / packageSize);
 
-    // Display the "Add to Cart" button
-    document.getElementById('add-to-cart').style.display = 'inline-block';
+    // Aktualizuje plochu, cenu a počet balení
+    areaResultElement.textContent = result.toFixed(2);
+    costResultElement.textContent = cost.toFixed(2);
+    packagesNeededElement.textContent = packagesNeeded;
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Najde všechna tlačítka pro výpočet
+    const calculateButtons = document.querySelectorAll('.calculate-button');
+    const resetButtons = document.querySelectorAll('.reset-button'); // Najde všechna tlačítka pro reset
+
+    // Přidá event listener pro každé tlačítko pro výpočet
+    calculateButtons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            // Najde rodičovskou kartu produktu
+            const productCard = button.closest('.product-card');
+
+            // Najde elementy
+            const xValueElement = productCard.querySelector('.x-value');
+            const yValueElement = productCard.querySelector('.y-value');
+            const areaResultElement = productCard.querySelector('.area-result');
+            const costResultElement = productCard.querySelector('.cost-result');
+            const pricePerPackageElement = productCard.querySelector('.price-per-package');
+            const packageSizeElement = productCard.querySelector('#package-size');
+            const packagesNeededElement = productCard.querySelector('.packages-needed');
+
+            // Vypočítá plochu
+            calculateArea(xValueElement, yValueElement, areaResultElement, costResultElement, pricePerPackageElement, packageSizeElement, packagesNeededElement);
+        });
+    });
+
+    // Přidá event listener pro každé tlačítko pro reset
+    resetButtons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            // Najde rodičovskou kartu produktu
+            const productCard = button.closest('.product-card');
+
+            // Najde elementy
+            const xValueElement = productCard.querySelector('.x-value');
+            const yValueElement = productCard.querySelector('.y-value');
+            const areaResultElement = productCard.querySelector('.area-result');
+            const costResultElement = productCard.querySelector('.cost-result');
+            const packagesNeededElement = productCard.querySelector('.packages-needed');
+
+            // Resetuje vstupy a výsledky
+            xValueElement.value = '';
+            yValueElement.value = '';
+            areaResultElement.textContent = '0';
+            costResultElement.textContent = '0';
+            packagesNeededElement.textContent = '0';
+        });
+    });
+
+    // Najde všechny vstupy pro hodnoty x a y
+    const xValueInputs = document.querySelectorAll('.x-value');
+    const yValueInputs = document.querySelectorAll('.y-value');
+
+    // Přidá event listener pro každý vstup pro hodnoty x a y
+    xValueInputs.forEach(function(input) {
+        input.addEventListener('keydown', function(event) {
+            // Kontroluje, zda byla stisknuta klávesa Enter
+            if (event.key === 'Enter') {
+                // Zabrání odeslání formuláře
+                event.preventDefault();
+
+                // Klikne na tlačítko pro výpočet
+                const calculateButton = input.closest('.product-card').querySelector('.calculate-button');
+                calculateButton.click();
+            }
+        });
+    });
+    yValueInputs.forEach(function(input) {
+        input.addEventListener('keydown', function(event) {
+            // Kontroluje, zda byla stisknuta klávesa Enter
+            if (event.key === 'Enter') {
+                // Zabrání odeslání formuláře
+                event.preventDefault();
+
+                // Klikne na tlačítko pro výpočet
+                const calculateButton = input.closest('.product-card').querySelector('.calculate-button');
+                calculateButton.click();
+            }
+        });
+    });
+});

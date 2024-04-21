@@ -104,7 +104,7 @@ def zmena_hesla(request):
         if form.is_valid():
             form.save()
             update_session_auth_hash(request, form.user)
-            messages.success(request, ('Změnili jste Vaše heslo.'))
+            messages.success(request, 'Změnili jste Vaše heslo.')
             return redirect('hlavni_stranka')
     else:
         form = PasswordChangeForm(user=request.user)
@@ -118,7 +118,7 @@ def zmena_profilu(request):
         form = EditProfileForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
-            messages.success(request, ('Změnili jste Váš profil'))
+            messages.success(request, 'Změnili jste Váš profil')
             return redirect('hlavni_stranka')
     else:
         form = EditProfileForm(instance=request.user)

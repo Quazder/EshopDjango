@@ -1,5 +1,5 @@
 {% load widget_tweaks %}
-<div class="recenze-section">
+<div class="recenze-section mb-5">
   <div class="container-md">
     {% if user.is_authenticated %}
      <form method="POST" action="{% url 'add_recenze' produkt.id %}">
@@ -8,7 +8,7 @@
         <div class="form-group">
             <label for="{{ field.id_for_label }}">{{ field.label }}</label>
             {{ field.errors }}
-            {{ field|add_class:"form-control" }}
+            {{ field|add_class:"form-control review-textarea" }}
         </div>
     {% endfor %}
     <button type="submit" class="btn btn-primary">Přidat recenzi</button>

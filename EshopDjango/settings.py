@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Eshop.apps.EshopConfig',
     'widget_tweaks',
+    'Kosik.apps.KosikConfig',
 
 ]
 
