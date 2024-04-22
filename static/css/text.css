@@ -802,3 +802,7 @@ img {
 .review-textarea {
     height: 100px; /* Nastavte výšku podle vašich potřeb */
 }
+
+.review {
+    display: none;
+}

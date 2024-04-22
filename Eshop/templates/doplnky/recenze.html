@@ -7,7 +7,11 @@
     {% for field in form %}
         <div class="form-group">
             <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-            {{ field.errors }}
+            {% if field.errors %}
+                <div class="alert alert-danger">
+                    {{ field.errors|first }}
+                </div>
+            {% endif %}
             {{ field|add_class:"form-control review-textarea" }}
         </div>
     {% endfor %}
@@ -17,12 +21,14 @@
       <p>Musíte se <a href="{% url 'prihlaseni' %}">přihlásit</a> pro přidání recenze.</p>
     {% endif %}
 
-    {% for recenze in recenze %}
-      <div class="recenze">
-        <h5>{{ recenze.user.username }}</h5>
-        <p>{{ recenze.text }}</p>
-        <p>{{ recenze.datum }}</p>
-      </div>
-    {% endfor %}
+{% for recenze in recenze %}
+  <div class="recenze review"> <!-- Přidána třída 'review' -->
+    <h5>{{ recenze.user.username }}</h5>
+    <p>{{ recenze.text }}</p>
+    <p>{{ recenze.datum }}</p>
+  </div>
+{% endfor %}
+      <button id="loadMore" class="btn btn-primary">Zobrazit další</button> <!-- Přidáno tlačítko pro načítání dalších recenzí -->
+      <button id="loadPrevious" class="btn btn-primary">Zpět</button> <!-- Pro načítání předchozích recenzí -->
   </div>
 </div>

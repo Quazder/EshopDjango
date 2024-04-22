@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from django.core.validators import MaxValueValidator, MinValueValidator
+from django.core.validators import MaxValueValidator, MinValueValidator, MinLengthValidator, MaxLengthValidator
 from django.db import models
 
 
@@ -189,7 +189,10 @@ class Recenze(models.Model):
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     produkt = models.ForeignKey(Produkt, on_delete=models.CASCADE)
-    text = models.TextField()
+    text = models.TextField(validators=[
+        MinLengthValidator(25, message="Recenze musí být alespoň 25 znaků dlouhá."),
+        MaxLengthValidator(100, message="Recenze nesmí překročit 100 znaků.")
+    ])
     datum = models.DateTimeField(auto_now_add=True)
     hodnoceni = models.IntegerField(choices=HODNOCENI_CHOICES, default=5,
                                     validators=[MinValueValidator(1), MaxValueValidator(5)])

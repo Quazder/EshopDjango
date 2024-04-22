@@ -177,3 +177,69 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+window.onload = function() {
+    let reviews = document.querySelectorAll('.review');
+    let loadMoreButton = document.getElementById('loadMore');
+    let loadPreviousButton = document.getElementById('loadPrevious');
+    let currentReviewIndex = 0;
+
+    // Skryje tlačítko "Zpět" na začátku
+    loadPreviousButton.style.display = 'none';
+
+    function showReviews() {
+        // Skryje všechny recenze
+        for (let i = 0; i < reviews.length; i++) {
+            reviews[i].style.display = 'none';
+        }
+
+        // Zobrazí další tři recenze
+        let nextReviewIndex = currentReviewIndex + 3;
+        for (; currentReviewIndex < nextReviewIndex && currentReviewIndex < reviews.length; currentReviewIndex++) {
+            reviews[currentReviewIndex].style.display = 'block';
+        }
+
+        // Skryje tlačítko, pokud nejsou k dispozici žádné další recenze
+        if (currentReviewIndex >= reviews.length) {
+            loadMoreButton.style.display = 'none';
+        }
+
+        // Zobrazí tlačítko "Zpět", pokud jsou k dispozici předchozí recenze
+        if (currentReviewIndex > 3) {
+            loadPreviousButton.style.display = 'block';
+        } else {
+            loadPreviousButton.style.display = 'none';
+        }
+    }
+
+    function showPreviousReviews() {
+        // Skryje všechny recenze
+        for (let i = 0; i < reviews.length; i++) {
+            reviews[i].style.display = 'none';
+        }
+
+        // Zobrazí předchozí tři recenze
+        currentReviewIndex -= 6;
+        if (currentReviewIndex < 0) {
+            currentReviewIndex = 0;
+        }
+        let nextReviewIndex = currentReviewIndex + 3;
+        for (; currentReviewIndex < nextReviewIndex && currentReviewIndex < reviews.length; currentReviewIndex++) {
+            reviews[currentReviewIndex].style.display = 'block';
+        }
+
+        // Skryje tlačítko "Zpět", pokud nejsou k dispozici předchozí recenze
+        if (currentReviewIndex <= 3) {
+            loadPreviousButton.style.display = 'none';
+        }
+
+        // Zobrazí tlačítko "Další", pokud jsou k dispozici další recenze
+        if (currentReviewIndex < reviews.length) {
+            loadMoreButton.style.display = 'block';
+        }
+    }
+
+    loadMoreButton.addEventListener('click', showReviews);
+    loadPreviousButton.addEventListener('click', showPreviousReviews);
+    showReviews();
+};

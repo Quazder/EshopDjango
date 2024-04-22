@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django import forms
+from django.core.validators import MinLengthValidator
 from django.forms import Textarea
 
 from Eshop.models import Recenze
@@ -61,4 +62,7 @@ class RecenzeForm(forms.ModelForm):
         }
         labels = {
             'text': 'Napište recenzi',
+        }
+        validators = {
+            'text': MinLengthValidator(25, message="Recenze musí být alespoň 25 znaků dlouhá.")
         }
