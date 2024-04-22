@@ -22,10 +22,13 @@
     {% endif %}
 
 {% for recenze in recenze %}
-  <div class="recenze review"> <!-- Přidána třída 'review' -->
+  <div class="recenze review">
     <h5>{{ recenze.user.username }}</h5>
     <p>{{ recenze.text }}</p>
     <p>{{ recenze.datum }}</p>
+    {% if user == recenze.user or user.is_staff %}
+      <a href="{% url 'delete_recenze' recenze.id %}" class="btn btn-danger">Smazat recenzi</a>
+    {% endif %}
   </div>
 {% endfor %}
 <div class="button-container">

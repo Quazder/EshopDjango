@@ -1,5 +1,7 @@
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
+from django.core.exceptions import PermissionDenied
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth.models import User, auth
@@ -25,7 +27,7 @@ def home(request):
 
 def PodlahaDetail(request, pk):
     produkt = Produkt.objects.get(id=pk)
-    recenze = Recenze.objects.filter(produkt=produkt)
+    recenze = Recenze.objects.filter(produkt=produkt).order_by('-datum')
     form = RecenzeForm()
     return render(request, 'produkt/detail.html', {'produkt': produkt, 'recenze': recenze, 'form': form})
 
@@ -137,3 +139,14 @@ def add_recenze(request, product_id):
             recenze.produkt = produkt
             recenze.save()
     return redirect('detail_podlahy', pk=produkt.id)
+
+
+@login_required
+def delete_recenze(request, recenze_id):
+    recenze = get_object_or_404(Recenze, pk=recenze_id)
+    if request.user == recenze.user or request.user.is_staff:
+        recenze.delete()
+        messages.success(request, "Recenze byla úspěšně smazána.")
+        return redirect('detail_podlahy', pk=recenze.produkt.id)
+    else:
+        raise PermissionDenied
