@@ -178,7 +178,9 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-window.onload = function() {
+document.addEventListener('DOMContentLoaded', function() {
+    // Your existing code here...
+
     let reviews = document.querySelectorAll('.review');
     let loadMoreButton = document.getElementById('loadMore');
     let loadPreviousButton = document.getElementById('loadPrevious');
@@ -242,4 +244,4 @@ window.onload = function() {
     loadMoreButton.addEventListener('click', showReviews);
     loadPreviousButton.addEventListener('click', showPreviousReviews);
     showReviews();
-};
+});
