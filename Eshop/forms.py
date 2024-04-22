@@ -9,6 +9,11 @@ from Eshop.models import Recenze
 
 class EditProfileForm(UserChangeForm):
     password = forms.CharField(label="", widget=forms.TextInput(attrs={'type': 'hidden'}))
+    username = forms.CharField(
+        max_length=150,
+        help_text='',  # prázdný řetězec pro odstranění textu nápovědy
+        widget=forms.TextInput(attrs={'class': 'form-control smaller-input', 'placeholder': 'Uživatelské jméno'}),
+    )
 
     class Meta:
         model = User
@@ -18,9 +23,9 @@ class EditProfileForm(UserChangeForm):
 class SignUpForm(UserCreationForm):
     email = forms.EmailField(label="",
                              widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Emailova adresa'}))
-    jmeno = forms.CharField(label="", max_length=100,
+    first_name = forms.CharField(label="", max_length=100,
                             widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Jméno'}))
-    prijmenu = forms.CharField(label="", max_length=100,
+    last_name = forms.CharField(label="", max_length=100,
                                widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Příjmení'}))
 
     class Meta:
@@ -34,8 +39,7 @@ class SignUpForm(UserCreationForm):
         self.fields['username'].widget.attrs['placeholder'] = 'Uživatelské jméno'
         self.fields['username'].label = ''
         self.fields[
-            'username'].help_text = '<span class="form-text text-muted"><small>MUsí obsahovat číslice a nebo ' \
-                                    '@/./+/-/_ only.</small></span>'
+            'username'].help_text = '<span class="form-text text-muted"><small></small></span>'
 
         self.fields['password1'].widget.attrs['class'] = 'form-control'
         self.fields['password1'].widget.attrs['placeholder'] = 'Heslo'

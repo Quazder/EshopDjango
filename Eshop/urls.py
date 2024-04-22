@@ -16,5 +16,4 @@ urlpatterns = [
     path('zmena_profilu/', views.zmena_profilu, name='zmena_profilu'),
     path('produkt/<int:product_id>/add_recenze/', views.add_recenze, name='add_recenze'),
     path('delete_recenze/<int:recenze_id>/', views.delete_recenze, name='delete_recenze'),
-
 ]

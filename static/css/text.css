@@ -800,7 +800,7 @@ img {
 }
 
 .review-textarea {
-    height: 100px; /* Nastavte výšku podle vašich potřeb */
+    height: 100px;
 }
 
 .review {
@@ -810,4 +810,8 @@ img {
 .button-container {
     display: flex;
     justify-content: space-between;
+}
+
+.smaller-input {
+    width: 40%;
 }
